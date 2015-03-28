@@ -1,0 +1,23 @@
+SMAP
+admin_jsp.java
+JSP
+*S JSP
+*F
++ 0 header.jspf
+WEB-INF/jspf/header.jspf
++ 1 admin.jsp
+WEB-INF/view/admin.jsp
++ 2 footer.jspf
+WEB-INF/jspf/footer.jspf
+*L
+1,4:60
+7,8:66
+14,14:74
+28:88,3
+29,7:91
+5#1,10:98
+15,39:109
+53,3:148
+1#2,40:151
+40,10:191
+*E

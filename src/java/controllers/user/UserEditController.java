@@ -77,6 +77,8 @@ public class UserEditController extends HttpServlet {
         String actionEditUser = request.getParameter("editUser");
         String actionBack = request.getParameter("Back");
         
+        String oldUserName = request.getParameter("oldUserName");
+        //String oldRoleName = request.getParameter("oldRoleName");
         String userName = request.getParameter("userName");
         String userEmail = request.getParameter("userEmail");
         String password = request.getParameter("password");
@@ -90,11 +92,11 @@ public class UserEditController extends HttpServlet {
                 //validate the format of userName and password
                 if(userValidator.validateUserName(userName) == true &&
                    userValidator.validateUserPassword(password) == true) {
-                    userManager.changeName(userName, userName);
+                    userManager.changeName(oldUserName, userName);
                     userManager.changeEmail(userName, userEmail);
                     userManager.changePassword(userName, password);
                     userManager.changeAnswer(userName, userAnswer);
-                    userManager.changeUserRole(userName, userRank, userName, userRank);
+                    //userManager.changeUserRole(oldUserName, oldRoleName, userName, userRank);
                 } 
                 else {
                     errorMessage = "User name should be no more than 20 characters, "

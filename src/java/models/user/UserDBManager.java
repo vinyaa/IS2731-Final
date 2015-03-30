@@ -245,16 +245,20 @@ public class UserDBManager {
     /*
     * Update user's information
     */
-    public boolean updateUser(User user) {
+    public boolean updateUser(User user, String oldName) {
     	boolean updateResult = false;
-	String sql = "UPDATE users SET hashed_password = ? , email = ? , hashed_answer = ?, is_activated = ? WHERE user_name = ?";
+	String sql = "UPDATE users SET user_name = ? , hashed_password = ? , email = ? , hashed_answer = ?, is_activated = ? WHERE user_name = ?";
     	try {			
             this.statement = connection.prepareStatement(sql);
-            this.statement.setString(1, user.getHashedPassword());
-            this.statement.setString(2, user.getEmail());
-            this.statement.setString(3, user.getHashedAnswer());
-            this.statement.setInt(4, user.getIsActivated());
-            this.statement.setString(5, user.getUserName());
+            this.statement.setString(1, user.getUserName());
+            this.statement.setString(2, user.getHashedPassword());
+            this.statement.setString(3, user.getEmail());
+            this.statement.setString(4, user.getHashedAnswer());
+            this.statement.setInt(5, user.getIsActivated());
+            if(oldName == null)
+                this.statement.setString(6, user.getUserName());
+            else
+                this.statement.setString(6, oldName);
             this.statement.executeUpdate();
             updateResult = true;
             this.statement.close();
@@ -273,10 +277,10 @@ public class UserDBManager {
 	String sql = "UPDATE users_roles SET user_name = ? , role_name = ? WHERE user_name = ? and role_name = ?";
     	try {			
             this.statement = connection.prepareStatement(sql);
-            this.statement.setString(1, oldUserName);
-            this.statement.setString(2, oldRoleName);
-            this.statement.setString(3, newUserName);
-            this.statement.setString(4, newRoleName);
+            this.statement.setString(1, newUserName);
+            this.statement.setString(2, newRoleName);
+            this.statement.setString(3, oldUserName);
+            this.statement.setString(4, oldRoleName);
             
             this.statement.executeUpdate();
             updateResult = true;
@@ -320,7 +324,8 @@ public class UserDBManager {
     	try {			
             this.statement = connection.prepareStatement(sql);
             this.statement.setString(1, userName); 
-            this.statement.setString(2, roleName);
+            if(roleName != null)
+                this.statement.setString(2, roleName);
             this.statement.executeUpdate();
             deleteResult = true;
             this.statement.close();

@@ -59,7 +59,7 @@ public class UserManager {
             return false;
         }
         try {
-            this.userDBManager.updateUser(currentUser);
+            this.userDBManager.updateUser(currentUser, null);
             return true;
         }
         catch(Exception ex) {
@@ -79,7 +79,7 @@ public class UserManager {
         try {
             User user = this.userDBManager.queryUser(oldName);  
             user.setUserName(newName);
-            this.userDBManager.updateUser(user);
+            this.userDBManager.updateUser(user, oldName);
             return true;
         }
         catch(Exception ex) {
@@ -96,7 +96,7 @@ public class UserManager {
             User user = this.userDBManager.queryUser(userName);
             String hashedPassword = UserManager.encryptText(newPassword);        
             user.setHashedPassword(hashedPassword);
-            this.userDBManager.updateUser(user);
+            this.userDBManager.updateUser(user, null);
             return true;
         }
         catch(Exception ex) {
@@ -112,7 +112,7 @@ public class UserManager {
         try {
             User user = this.userDBManager.queryUser(userName);  
             user.setEmail(newEmail);
-            this.userDBManager.updateUser(user);
+            this.userDBManager.updateUser(user, null);
             return true;
         }
         catch(Exception ex) {
@@ -129,7 +129,7 @@ public class UserManager {
             User user = this.userDBManager.queryUser(userName);  
             String hashedAnswer = UserManager.encryptText(newAnswer);
             user.setHashedAnswer(hashedAnswer);
-            this.userDBManager.updateUser(user);
+            this.userDBManager.updateUser(user, null);
             return true;
         }
         catch(Exception ex) {
@@ -145,7 +145,7 @@ public class UserManager {
         try {
             User user = this.userDBManager.queryUser(userName);  
             user.setIsActivated(isActivated);
-            this.userDBManager.updateUser(user);
+            this.userDBManager.updateUser(user, null);
             return true;
         }
         catch(Exception ex) {
@@ -179,8 +179,8 @@ public class UserManager {
         //numbers of admin cannot be zero
         for(UserRole tempItem : this.userDBManager.queryAllUsersRoles()) {
             if(tempItem.getRoleName().equals("admin") && !tempItem.getUserName().equals(currentUser.getUserName())) {
-                return this.userDBManager.deleteUser(currentUser) && 
-                       this.userDBManager.deleteUserRole(currentUser.getUserName(), currentRoleName);
+                return (this.userDBManager.deleteUserRole(currentUser.getUserName(), currentRoleName) && 
+                        this.userDBManager.deleteUser(currentUser));
             }
         }
         return false;       

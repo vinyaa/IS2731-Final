@@ -14,7 +14,9 @@
         <title>Edit User</title>
     </head>
     <body>
-        <% User currentUser = (User)request.getAttribute("currentUser"); %>
+        <% User currentUser = (User)request.getAttribute("currentUser"); 
+           String oldUserName = currentUser.getUserName();
+        %>
         <% if(currentUser != null) { %>
             <div class="div_system_title">
                 <b>Edit the user</b>
@@ -55,7 +57,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="hidden" name="userName" value="<%=currentUser.getUserName()%>"/>
+                        <input type="hidden" name="oldUserName" value="<%=oldUserName%>"/>
                         <input type="submit" name="editUser" value="Edit" class="submit_edit_user"/>
                         <input id="id_button_clear" type="button" value="clear" onclick="clearUserText()"/>
                         <input type="submit" name="Back" value="Back" class="submit_edit_user"/>

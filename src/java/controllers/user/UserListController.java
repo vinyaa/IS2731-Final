@@ -103,7 +103,7 @@ public class UserListController extends HttpServlet {
                 request.setAttribute("allUsersList", allUsersList);
                 request.setAttribute("allUserRoleList", allUserRoleList);
                 request.setAttribute("allUsersCount", allUsersCount);
-                requestDispatcher = request.getRequestDispatcher("/user/listUsers.jsp");
+                requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
                 requestDispatcher.forward(request, response);
             }   
         }

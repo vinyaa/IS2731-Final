@@ -1,0 +1,89 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 23, 2015 at 07:30 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `final_project`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `role_name` varchar(50) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`role_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`role_name`) VALUES
+('admin'),
+('client');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_name` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `hashed_password` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `hashed_answer` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `is_activated` int CHARACTER SET utf8 NOT NULL, --'1' means activated, '0' means not yet.
+  PRIMARY KEY (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_name`, `hashed_password`) VALUES
+('cat', 'D077F244DEF8A70E5EA758BD8352FCD8', 'cat@cat.com', 'D077F244DEF8A70E5EA758BD8352FCD8'),
+('dog', '06D80EB0C50B49A509B49F2424E8C805', 'dog@dog.com', '06D80EB0C50B49A509B49F2424E8C805');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `users_roles` (
+  `user_name` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `role_name` varchar(50) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`user_name`,`role_name`),
+  FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`),
+  FOREIGN KEY (`role_name`) REFERENCES `roles` (`role_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users_roles`
+--
+
+INSERT INTO `users_roles` (`user_name`, `role_name`) VALUES
+('dog', 'admin'),
+('cat', 'client');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

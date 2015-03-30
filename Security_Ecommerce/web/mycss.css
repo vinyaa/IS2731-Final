@@ -1,0 +1,284 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Author     : jonathan
+*/
+
+body {
+  
+  font-family: Lucida Grande, "Lucida Grande", Verdana, Geneva, sans-serif; 
+  font-weight: 300;
+  font-size: small;
+  color: black;
+  margin:0px;
+  background-color: #F0F0F0;
+}
+
+h1 {
+	font-weight: 200;
+	letter-spacing: 4px;
+
+        padding: 0;
+}
+
+h2 {
+    margin-bottom: 0;
+    padding-bottom: 4px;
+}
+h4 {
+    margin-top: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+hr {
+	width: 50%;
+        color: #a1a1a1;
+	margin: 1em 0;
+        margin-bottom: 0px;
+}
+
+input{
+    padding: 4px;
+}
+
+table {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 6px;
+}
+
+th {
+    text-align: center;
+    font-weight: bold;
+}
+
+button {font-family: inherit;}
+
+input {font-family: inherit;}
+
+#selectbuilding {
+    padding:3px;
+    margin: 0;
+
+    color:#888;
+    width: 55%;
+    outline:2px;
+    display: inline-block;
+
+}
+
+a { 
+   color: black;
+   text-decoration: none;
+}
+
+form {display: inline;
+    margin: 0px 0px 0px 0px; }
+
+textarea {
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+}
+
+#header {
+
+    height:70px;
+    top:0px;
+    background:#FFFFFF;
+    position:fixed;
+    width:100%;
+    margin:0px auto;
+    -moz-box-shadow:    1px 1px 1px 1px #dcdcdc;
+    -webkit-box-shadow: 1px 1px 1px 1px #dcdcdc;
+    box-shadow:         1px 1px 1px 1px #dcdcdc;
+    
+}
+
+#headerContent {
+    
+    top: 15px;
+    position:relative;
+    width: 100%;
+    margin:0px auto;
+    width: 70%;
+}
+
+#headerInfo {
+    
+    padding-top: 6px;
+}
+
+#contentBox{
+    border: 1px solid #a1a1a1;
+    padding: 10px 5px; 
+    background: #dddddd;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto; 
+    border-radius: 7px; 
+}
+
+#signInBox0{
+    border: 1px solid #a1a1a1;
+    padding: 10px 5px; 
+    background: #dddddd;
+    width: 300px;
+    border-radius: 7px;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         2px 2px 2px 1px #ccc;
+}
+
+#signupButton{
+    width: 140px;
+    background-color: #888;
+    color: white;
+    padding: 4px;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+}
+
+#signInBox1{
+    padding: 10px 5px; 
+    width: 300px;
+    float: left;
+}
+
+#boardBox{
+    border: 1px solid #a1a1a1;
+    padding: 10px 5px;
+    padding-left: 10px;
+    background: #dddddd;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto; 
+    border-radius: 7px;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         2px 2px 2px 1px #ccc;
+}
+
+.contentLSide{
+    border: 2px solid #a1a1a1;
+    padding: 7px 7px; 
+    width: 90%;
+    border-radius: 7px;
+    
+}
+.contentRSide{
+    border: 2px solid #a1a1a1;
+    padding: 5px 5px; 
+    background: #dddddd;
+    width: 90%;
+    border-radius: 7px;
+}
+
+.right {
+
+    float: right;
+}
+
+.left {
+    float: left ;
+}
+
+#content {
+    background: #F0F0F0;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 70%;
+    
+}
+#signupcontent {
+    background: #F0F0F0;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto; 
+    
+}
+
+#signup {
+   
+    background: #F0F0F0;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 80%;
+}
+
+.mainContent{ 
+    float: left; 
+    width: 15%;
+    padding: 15px;
+    padding-top: 13px;
+    margin-top: 10px;
+    border: 1px solid #a1a1a1;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+    background:#FFFFFF;
+}
+
+.column-left{ 
+    float: left; 
+    width: 15%;
+    padding: 15px;
+    padding-top: 19px;
+    margin-top: 10px;
+    line-height: 175%;
+}
+
+.column-right{ 
+    float: right; 
+    width: 10%;
+    padding: 2px;
+}
+.column-center{ 
+    display: inline-block; 
+    width: 60%; 
+    padding: 11px;
+    margin-left: 16px;
+}
+
+.whitebox {
+    background: white;
+    margin-top: 30px;
+    padding-left: 30px;
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+}
+
+.profile{
+    padding-top: 15px;
+    padding-left:10px;
+    padding-right:30px;
+    height: 200px;  
+}
+
+.shadow{
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,138 @@
+/* 
+    Created on : Mar 28, 2015, 4:42:53 PM
+    Author     : hab81
+*/
+
+.div_system_title{
+    font-family: calibri;
+    font-size: 30px;
+    color: #000066;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#div_login{
+    font-family: calibri;
+    color: #000066;
+    width:340px;		
+    margin-top:0%;
+    margin-left:35%;
+    margin-right:30%;
+    margin-bottom:0%;
+}	  
+  
+#div_login_fieldset {
+    border-color: #0099cc;
+}
+
+#div_new_user{
+    font-family: calibri;
+    color: #000066;
+    width:340px;		
+    margin-top:0%;
+    margin-left:35%;
+    margin-right:30%;
+    margin-bottom:0%;
+}	  
+  
+#div_new_user_fieldset {
+    border-color: #0099cc;
+}
+
+#div_current_user{
+    font-family: calibri;
+    color: #000066;
+    width:340px;		
+    margin-top:0%;
+    margin-left:35%;
+    margin-right:30%;
+    margin-bottom:0%;
+}	  
+  
+#div_current_user_fieldset {
+    border-color: #0099cc;
+}
+  
+#div_users_list{
+    font-family: calibri;
+    text-align: center;
+    color: #000066;
+    width:450px;		
+    margin-top:0%;
+    margin-left:35%;
+    margin-right:30%;
+    margin-bottom:0%;
+}	 
+
+.submit_login {
+    font-size: 15px;
+    height: 30px;
+    width: 60px;
+    color: #000066;
+    margin-left: 25%;
+    margin-right: 40px;
+}
+
+.submit_backlog {
+    font-size: 25px;
+    height: 50px;
+    width: 200px;
+    color: #000066;
+    margin-top: 20px;
+    margin-left: 40%;
+}
+
+#id_button_clear {
+    font-size: 15px;
+    height: 30px;
+    width: 60px;
+    color: #000066;
+}
+
+.submit_add_user {
+    font-size: 15px;
+    height: 30px;
+    width: 60px;
+    color: #000066;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.submit_edit_user {
+    font-size: 15px;
+    height: 30px;
+    width: 60px;
+    color: #000066;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.submit_list_users_add {
+    font-size: 15px;
+    height: 30px;
+    width: 77px;
+    color: #000066;
+    margin-top: 10px;
+    margin-left:40%;
+    margin-right: 45px;
+}
+
+.submit_list_users_log_out {
+    font-size: 15px;
+    height: 30px;
+    width: 70px;
+    color: #000066;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.error_message {
+    text-align: center;
+    font-family: calibri;
+    color: #cc0000;
+}
+
+
+
+
+

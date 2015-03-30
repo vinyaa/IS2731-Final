@@ -1,0 +1,141 @@
+package controllers.user;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.user.SessionManager;
+import models.user.User;
+import models.user.UserManager;
+import models.user.UserRole;
+
+/**
+ *
+ * @author hab81
+ */
+@WebServlet(name = "UserLoginController", urlPatterns = {"/login"})
+public class UserLoginController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>No Such Page</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>This is not a valid URL, please get back to valid pages.</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String actionLogin = request.getParameter("login");
+        String actionBack = request.getParameter("backToLogin");
+        
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+
+        RequestDispatcher requestDispatcher;
+        UserManager userManager = new UserManager();
+        if(actionLogin != null) {
+            boolean isLegalUser = userManager.authenticateUser(userName, password);
+            if(isLegalUser == true) {
+                HttpSession session = request.getSession();
+                String sesionCode = SessionManager.generateSessionCode(userName);
+                session.setAttribute("sesssionCode",sesionCode); 
+                //session will be expired after 30 mins
+                session.setMaxInactiveInterval(60 * 30);
+                Cookie userCookie = new Cookie("userCookie", userName);
+                //cookie will be expired after 30 mins
+                userCookie.setMaxAge(60 * 30);
+                response.addCookie(userCookie);
+                List<UserRole> userRoleList = userManager.listAllUsersRoles();
+                String roles = "";
+                for(UserRole item : userRoleList) {
+                    if(item.getUserName().equals(userName))
+                        roles += item.getRoleName() + ":";
+                }
+                if(roles.contains("admin")) {
+                    List<User> allUsersList = userManager.listAllUsers();
+                    List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
+                    int allUsersCount = userManager.getUsersCount();
+                    request.setAttribute("allUsersList", allUsersList);
+                    request.setAttribute("allUserRoleList", allUserRoleList);
+                    request.setAttribute("allUsersCount", allUsersCount);
+                    requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+                }
+                else {
+                    requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");  
+                }   
+            } 
+            else {
+                requestDispatcher = request.getRequestDispatcher("/loginError.jsp");      
+            }
+        }
+        else if(actionBack != null) {
+            requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        }
+        else {
+            requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        }
+        requestDispatcher.forward(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

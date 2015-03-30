@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `hashed_password` varchar(100) CHARACTER SET utf8 NOT NULL,
   `email` varchar(100) CHARACTER SET utf8 NOT NULL,
   `hashed_answer` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `is_activated` int CHARACTER SET utf8 NOT NULL, --'1' means activated, '0' means not yet.
   PRIMARY KEY (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -40,13 +40,9 @@
                     <tr>  
                         <th>User Name</th>
                         <th>User Email</th>
-<<<<<<< HEAD
                         <th>User Rank</th> 
                         <th>User Status</th>
-=======
-                        <th>User Rank</th>
                         <th colspan="3">Operations</th>
->>>>>>> origin/master
                     </tr>  
                     <%  
                         List<User> allUsersList = (List<User>)request.getAttribute("allUsersList");     

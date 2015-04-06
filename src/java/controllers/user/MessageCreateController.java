@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers.user;
 
 import java.io.IOException;
@@ -6,21 +11,21 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.user.MessageManager;
 import models.user.User;
 import models.user.UserManager;
 import models.user.UserRole;
 
 /**
  *
- * @author
+ * @author yanma
  */
-@WebServlet(name = "UserListController", urlPatterns = {"/UserList"})
-public class UserListController extends HttpServlet {
+@WebServlet(name = "MessageCreate", urlPatterns = {"/MessageCreate"})
+public class MessageCreateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,9 +43,21 @@ public class UserListController extends HttpServlet {
         //validate session first
         HttpSession session = request.getSession(false);
         if(session.getAttribute("sesssionCode") == null) {
-            requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");
-            requestDispatcher.forward(request, response);      
-        }
+            requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");    
+            requestDispatcher.forward(request, response);
+        } 
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet MessageCreateController</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet MessageCreateController at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +71,7 @@ public class UserListController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {  
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -69,55 +86,36 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         RequestDispatcher requestDispatcher;
+        MessageManager messageManager = new MessageManager();
         UserManager userManager = new UserManager();
-        User currentUser;
         
-        String actionAddUser = request.getParameter("addUser");
-        String actionEditUser = request.getParameter("editUser");
-        String actionRemoveUser = request.getParameter("removeUser");
-        String actionLogOut = request.getParameter("logOut");
+        String errorMessage = null;
+        String actionCreateMessage = request.getParameter("createMessage");
+        String actionBack = request.getParameter("Back");
         
-        if(actionAddUser !=null && actionAddUser.equals("Add User")) {
-            requestDispatcher = request.getRequestDispatcher("/admin/addUser.jsp");
+        String receiver = request.getParameter("receiver");
+        String content = request.getParameter("messageContent");        
+        
+        if(actionCreateMessage !=null && actionCreateMessage.equals("Send Message")) {
+            messageManager.createMessage("dog", receiver, content);
+            requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
             requestDispatcher.forward(request, response);
         }
-        else if(actionEditUser != null && actionEditUser.equals("Edit")) {
-            String userName = request.getParameter("userName");
-            if(userName != null){
-                currentUser = userManager.findUser(userName);
-                request.setAttribute("currentUser", currentUser);
-                requestDispatcher = request.getRequestDispatcher("/admin/editUser.jsp");
-                requestDispatcher.forward(request, response);
-            }
-        }
-        else if(actionRemoveUser != null && actionRemoveUser.equals("Remove")) {
-            String userName = request.getParameter("userName");
-            if(userName != null){
-                currentUser = userManager.findUser(userName);
-                userManager.deleteUser(currentUser, null);
-
-                List<User> allUsersList = userManager.listAllUsers();
-                List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
-                int allUsersCount = userManager.getUsersCount();
-                request.setAttribute("allUsersList", allUsersList);
-                request.setAttribute("allUserRoleList", allUserRoleList);
-                request.setAttribute("allUsersCount", allUsersCount);
-                requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
-                requestDispatcher.forward(request, response);
-            }   
-        }
-        else if(actionLogOut != null && actionLogOut.equals("Log Out")) {
-            HttpSession session=request.getSession(false);  
-            session.invalidate();
-            requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        else if(actionBack != null && actionBack.equals("Back")) {
+            List<User> allUsersList = userManager.listAllUsers();
+            List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
+            int allUsersCount = userManager.getUsersCount();
+            request.setAttribute("allUsersList", allUsersList);
+            request.setAttribute("allUserRoleList", allUserRoleList);
+            request.setAttribute("allUsersCount", allUsersCount);
+            requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
             requestDispatcher.forward(request, response);
         }
         else {
             requestDispatcher = request.getRequestDispatcher("/error404.jsp");
             requestDispatcher.forward(request, response);
-        }   
+        }
     }
 
     /**

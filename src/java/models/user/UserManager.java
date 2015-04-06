@@ -213,7 +213,6 @@ public class UserManager {
         return this.userDBManager.queryAllUsersRoles();
     }
     
-    
     /*
     * Get the number of all users
     */

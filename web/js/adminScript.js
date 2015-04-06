@@ -12,6 +12,17 @@ function clearLoginText(){
 }
 
 /*
+ * This function clears text fields of user register area.
+ */
+function clearRegisterText(){
+    document.getElementById("text_user_name").value = "";
+    document.getElementById("password_password").value = ""; 
+    document.getElementById("password_password_confirm").value = ""; 
+    document.getElementById("text_email_address").value = "";
+    document.getElementById("text_answer").value = "";
+}
+
+/*
  * This function clears text fields of new user area.
  */
 function clearUserText(){

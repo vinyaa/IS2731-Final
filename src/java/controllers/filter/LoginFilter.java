@@ -47,7 +47,7 @@ public class LoginFilter implements Filter{
         String clientURI = servletRequest.getRequestURI();
 
         //Pages that don't need to be filtered, currently just Login page, css and js files
-        if(clientURI.contains("login") || clientURI.endsWith(".js") || clientURI.endsWith(".css")) {
+        if(clientURI.contains("login") || clientURI.contains("register") || clientURI.endsWith(".js") || clientURI.endsWith(".css")) {
             chain.doFilter(request, response);
         }
         else if(session == null || session.getAttribute("sesssionCode") == null) {

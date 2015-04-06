@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Mar 25, 2014, 8:09:15 PM
+    Document   : register
+    Created on : Apr 6, 2014, 8:09:15 AM
     Author     : hab81
 --%>
 
@@ -10,17 +10,17 @@
     <head>
         <link rel="stylesheet" href="css/admin_style.css" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please Login</title>
+        <title>Register New User</title>
     </head>
     <body>
         <div class="div_system_title">
-            <b>User Management System</b>
+            <b>Register New User</b>
         </div>
         <!-- This div area displays the user login information. -->
         <div id="div_login">
             <fieldset id="div_login_fieldset">
                 <legend id="div_login_legend">Please input user information</legend>
-                <form action="login" method="post">
+                <form action="register" method="post">
                     <table cellpadding="4">
                         <tr>
                             <td align="right">User Name</td>
@@ -30,12 +30,21 @@
                             <td align="right">Password</td>
                             <td align="left"><input type="password" name="password" id="password_password"/></td>
                         </tr>
+                        <tr>
+                            <td align="right">Confirm Password</td>
+                            <td align="left"><input type="password" name="passwordConfirm" id="password_password_confirm"/></td>
+                        </tr>
+                        <tr>
+                            <td align="right">E-mail</td>
+                            <td align="left"><input type="text" name="emailAddress" id="text_email_address"/></td>
+                        </tr>
+                        <tr>
+                            <td align="right">Security Answer</td>
+                            <td align="left"><input type="text" name="userAnswer" id="text_answer"/></td>
+                        </tr>
                     </table>
-                    <input type="submit" name="login" value="Sumbit" class="submit_login"/>
-                    <input id="id_button_clear" type="button" value="clear" onclick="clearLoginText()"/>
-                </form>
-                <form action="login" method="post">
-                    <input type="submit" name="register" value="Register" style="width: 60px"/>
+                    <input type="submit" name="register" value="Register" class="submit_register"/>
+                    <input id="id_button_clear" type="button" value="clear" onclick="clearRegisterText()"/>
                 </form>
             </fieldset>
         </div>

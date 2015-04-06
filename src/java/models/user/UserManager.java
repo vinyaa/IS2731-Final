@@ -224,7 +224,7 @@ public class UserManager {
     /*
     * Use SHA-256 aogorithm to generate hashed string of a plain text (password or security answer).
     */
-    protected static String encryptText(String plainText) {
+    public static String encryptText(String plainText) {
         String hashString = null;
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");

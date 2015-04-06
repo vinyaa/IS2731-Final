@@ -20,7 +20,13 @@
         <% if(request.getAttribute("errorMessage") != null) { %>
         <div class="error_message"><p><b><%=request.getAttribute("errorMessage")%></b></p></div>   
         <% }      
-        else if(request.getAttribute("allUsersCount") != null) { %>
+        else if(request.getAttribute("allUsersCount") != null) { 
+             if(request.getAttribute("registerMessage") != null) { %>
+                <div class="register_message"><p><b><%=request.getAttribute("registerMessage")%></b></p></div>   
+            <% }  
+            if(request.getAttribute("activationMessage") != null) { %>
+                <div class="activation_message"><p><b><%=request.getAttribute("activationMessage")%></b></p></div>   
+            <% } %>  
             <div class="div_system_title">
                 <% int allUsersCount = (Integer)request.getAttribute("allUsersCount"); %>
                 <p>There are <%=allUsersCount%> users.</p>
@@ -30,7 +36,8 @@
                     <tr>  
                         <th>User Name</th>
                         <th>User Email</th>
-                        <th>User Rank</th>  
+                        <th>User Rank</th> 
+                        <th>User Status</th>
                     </tr>  
                     <%  
                         List<User> allUsersList = (List<User>)request.getAttribute("allUsersList");     
@@ -47,6 +54,12 @@
                                     <td><%=user.getUserName()%></td>  
                                     <td><%=user.getEmail()%></td>
                                     <td><%=roles%></td>  
+                                    <% if(user.getIsActivated() == 0){ %>
+                                        <td><b style="color: #cc0000">Not Activated</b></td>
+                                    <% }
+                                    else if(user.getIsActivated() == 1){ %>
+                                        <td><b style="color: #009966">Activated</b></td>
+                                    <% } %>
                                     <td style="padding-left: 15px; padding-right: 15px;">  
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>

@@ -34,6 +34,9 @@
                     <input type="submit" name="login" value="Sumbit" class="submit_login"/>
                     <input id="id_button_clear" type="button" value="clear" onclick="clearLoginText()"/>
                 </form>
+                <form action="login" method="post">
+                    <input type="submit" name="register" value="Register" style="width: 60px"/>
+                </form>
             </fieldset>
         </div>
         <script type="text/javascript" src="js/adminScript.js"></script>

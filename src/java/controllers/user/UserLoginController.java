@@ -77,6 +77,7 @@ public class UserLoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String actionLogin = request.getParameter("login");
+        String actionRegister = request.getParameter("register");
         String actionBack = request.getParameter("backToLogin");
         
         String userName = request.getParameter("userName");
@@ -118,6 +119,9 @@ public class UserLoginController extends HttpServlet {
             else {
                 requestDispatcher = request.getRequestDispatcher("/loginError.jsp");      
             }
+        }
+        else if(actionRegister != null) {
+            requestDispatcher = request.getRequestDispatcher("/register.jsp");
         }
         else if(actionBack != null) {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");

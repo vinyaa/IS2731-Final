@@ -73,6 +73,15 @@
     margin-right: 40px;
 }
 
+.submit_register {
+    font-size: 15px;
+    height: 30px;
+    width: 70px;
+    color: #000066;
+    margin-left: 25%;
+    margin-right: 40px;
+}
+
 .submit_backlog {
     font-size: 25px;
     height: 50px;
@@ -130,6 +139,18 @@
     text-align: center;
     font-family: calibri;
     color: #cc0000;
+}
+
+.register_message {
+    text-align: center;
+    font-family: calibri;
+    color: #0099cc;
+}
+
+.activation_message {
+    text-align: center;
+    font-family: calibri;
+    color: #009966;
 }
 
 

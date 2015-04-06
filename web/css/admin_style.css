@@ -4,73 +4,107 @@
 */
 
 .div_system_title{
-    font-family: calibri;
-    font-size: 30px;
+    /*font-family: calibri;*/
+    /*font-size: 30px;*/
     color: #000066;
     text-align: center;
     margin-bottom: 0px;
+    margin-top: 50px;
+}
+
+input.form-control {
+    width: 35%;
+}
+
+select.form-control {
+    width: 35%;
 }
 
 #div_login{
-    font-family: calibri;
+/*    font-family: calibri;
     color: #000066;
     width:340px;		
     margin-top:0%;
     margin-left:35%;
     margin-right:30%;
-    margin-bottom:0%;
+    margin-bottom:0%;*/
+    margin-left: 35%;
 }	  
   
 #div_login_fieldset {
     border-color: #0099cc;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 50px;
 }
 
 #div_new_user{
-    font-family: calibri;
+/*    font-family: calibri;
     color: #000066;
     width:340px;		
     margin-top:0%;
     margin-left:35%;
     margin-right:30%;
-    margin-bottom:0%;
+    margin-bottom:0%;*/
+    margin-left: 35%;
+    margin-right: auto;
 }	  
   
 #div_new_user_fieldset {
     border-color: #0099cc;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 50px;
 }
 
 #div_current_user{
-    font-family: calibri;
+/*    font-family: calibri;
     color: #000066;
     width:340px;		
     margin-top:0%;
     margin-left:35%;
     margin-right:30%;
-    margin-bottom:0%;
+    margin-bottom:0%;*/
+    margin-left: 35%;
+    margin-right: auto;
 }	  
   
 #div_current_user_fieldset {
     border-color: #0099cc;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 50px;
 }
   
 #div_users_list{
-    font-family: calibri;
+/*    font-family: calibri;
     text-align: center;
     color: #000066;
     width:450px;		
     margin-top:0%;
     margin-left:35%;
     margin-right:30%;
-    margin-bottom:0%;
+    margin-bottom:0%;*/
+    width:80%;		
+    margin-left: auto;
+    margin-right: auto;
 }	 
 
+#two-buttons{
+    text-align: center;
+}
+
 .submit_login {
-    font-size: 15px;
+/*    font-size: 15px;
     height: 30px;
     width: 60px;
     color: #000066;
     margin-left: 25%;
-    margin-right: 40px;
+    margin-right: 40px;*/
+
 }
 
 .submit_register {
@@ -92,10 +126,10 @@
 }
 
 #id_button_clear {
-    font-size: 15px;
+/*    font-size: 15px;
     height: 30px;
     width: 60px;
-    color: #000066;
+    color: #000066;*/
 }
 
 .submit_add_user {

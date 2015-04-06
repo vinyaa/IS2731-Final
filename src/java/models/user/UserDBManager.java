@@ -353,7 +353,7 @@ public class UserDBManager {
     /**
      * create new message
      * @param message
-     * @return 
+     * @return  
      */
     public boolean addMessage(Message message) {
         boolean addResult = false;

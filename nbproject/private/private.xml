@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/src/java/models/user/UserDBManager.java</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/web/admin/editUser.jsp</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/src/java/controllers/user/UserLoginController.java</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/web/login.jsp</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/src/java/models/user/UserManager.java</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/src/java/controllers/user/UserEditController.java</file>
-            <file>file:/E:/document/temp/PITT/INFSCI_2731/Group_Project/is2731_final/src/java/controllers/user/UserListController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -21,7 +21,7 @@ public class UserDBManager {
     private ResultSet resultSet;
 
     public UserDBManager() {
-        databaseURL = "jdbc:mysql://localhost:3306/final_project";
+        databaseURL = "jdbc:mysql://localhost:8889/is2731";
         dbUserName = "is2731";
         dbPassword = "is2731";
         try {
@@ -348,5 +348,159 @@ public class UserDBManager {
             Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+    
+    /**
+     * create new message
+     * @param message
+     * @return 
+     */
+    public boolean addMessage(Message message) {
+        boolean addResult = false;
+	String sql = "INSERT INTO message"
+                    + "(sender, receiver, content, is_read) VALUES"
+                    + "(? , ? , ? , ?)";
+    	try {			
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setString(1, message.getSender());
+            this.statement.setString(2, message.getReceiver());
+            this.statement.setString(3, message.getContent());    
+            this.statement.setInt(4, message.getIs_read());    
+            this.statement.executeUpdate();
+            addResult = true;
+            this.statement.close();
+	}
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return addResult; 
+    }
+    
+    /**
+     * list all message sent by sender
+     * @param sender
+     * @return 
+     */
+    public List<Message> queryAllMessages(String sender) {
+        List<Message> messageList = new ArrayList<>();
+	Message message;
+        String sql = "SELECT * FROM message WHERE sender = ? ;";
+	try {	
+            this.statement = connection.prepareStatement(sql);
+            statement.setString(1, sender);
+            this.resultSet = this.statement.executeQuery();
+            while(this.resultSet.next()) {
+		message = new Message();
+                message.setMid(this.resultSet.getInt("mid"));
+                message.setSender(this.resultSet.getString("sender"));
+                message.setReceiver(this.resultSet.getString("receiver"));
+                message.setContent(this.resultSet.getString("content"));
+                message.setTime(this.resultSet.getTimestamp("time"));
+                message.setIs_read(this.resultSet.getInt("is_read"));
+		messageList.add(message);
+            }	
+            this.statement.close();
+	} 
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return messageList;
+    }
+    
+    /**
+     * list all messages for one receiver
+     * @param receiver
+     * @return 
+     */
+    public List<Message> queryAllMessagesForReceiver(String receiver) {
+        List<Message> messageList = new ArrayList<>();
+	Message message;
+        String sql = "SELECT * FROM message WHERE receiver = ?";
+	try {	
+            this.statement = connection.prepareStatement(sql);
+            statement.setString(1, receiver);
+            this.resultSet = this.statement.executeQuery();
+            while(this.resultSet.next()) {
+		message = new Message();
+                message.setMid(this.resultSet.getInt("mid"));
+                message.setSender(this.resultSet.getString("sender"));
+                message.setContent(this.resultSet.getString("content"));
+                message.setTime(this.resultSet.getTimestamp("time"));
+                message.setIs_read(this.resultSet.getInt("is_read"));
+		messageList.add(message);
+            }	
+            this.statement.close();
+	} 
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return messageList;
+    }
+    
+    /**
+     * after receiver read the message, the message status change to read
+     * @param mid
+     * @return 
+     */
+    public boolean updateMessageToRead(int mid) {
+        boolean updateResult = false;
+        String sql = "UPDATE message SET is_read = 1 WHERE mid = ?";
+    	try {			
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setInt(1, mid);
+            this.statement.executeUpdate();
+            updateResult = true;
+            this.statement.close();
+	}
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return updateResult; 
+    }
+    
+    /**
+     * admin delete the message which sent to a receiver
+     * @param sender
+     * @param mid
+     * @return 
+     */
+    public boolean deleteMessageBySender(User sender, int mid) {
+        boolean deleteResult = false;
+        String sql = "DELETE FROM message WHERE mid = ? AND sender = ?";
+    	try {			
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setInt(1, mid);  
+            this.statement.setString(2, sender.getUserName());
+            this.statement.executeUpdate();
+            deleteResult = true;
+            this.statement.close();
+	}
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return deleteResult; 
+    }
+    
+    /**
+     * admin update message content and set unread
+     * @param mid
+     * @param content
+     * @return 
+     */
+    public boolean updateMessageContent (int mid, String content) {
+        boolean updateResult = false;
+        String sql = "UPDATE message SET is_read = 0 AND conent = ? WHERE mid = ?";
+    	try {			
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setString(1, content);
+            this.statement.setInt(2, mid);
+            this.statement.executeUpdate();
+            updateResult = true;
+            this.statement.close();
+	}
+        catch(SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return updateResult; 
     }
 }

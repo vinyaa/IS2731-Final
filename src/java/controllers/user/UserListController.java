@@ -72,10 +72,12 @@ public class UserListController extends HttpServlet {
         RequestDispatcher requestDispatcher;
         UserManager userManager = new UserManager();
         User currentUser;
+        User receiver;
         
         String actionAddUser = request.getParameter("addUser");
         String actionEditUser = request.getParameter("editUser");
         String actionRemoveUser = request.getParameter("removeUser");
+        String actionCreateMessage = request.getParameter("sendMessage");
         String actionLogOut = request.getParameter("logOut");
         
         if(actionAddUser !=null && actionAddUser.equals("Add User")) {
@@ -106,6 +108,15 @@ public class UserListController extends HttpServlet {
                 requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
                 requestDispatcher.forward(request, response);
             }   
+        }
+        else if (actionCreateMessage != null && actionCreateMessage.equals("Send Message")) {
+            String userName = request.getParameter("userName");
+            if(userName != null){
+                receiver = userManager.findUser(userName);
+                request.setAttribute("receiver", receiver);
+                requestDispatcher = request.getRequestDispatcher("/admin/createMessage.jsp");
+                requestDispatcher.forward(request, response);
+            }
         }
         else if(actionLogOut != null && actionLogOut.equals("Log Out")) {
             HttpSession session=request.getSession(false);  

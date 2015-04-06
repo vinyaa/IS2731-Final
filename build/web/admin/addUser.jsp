@@ -9,19 +9,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/admin_style.css" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add New User</title>
     </head>
     <body>
         <div class="div_system_title">
-            <b>Add a new user</b>
+<!--            <b>Add a new user</b>-->
+            <h1><b>Add a new user</b></h1>
         </div>
         <!-- This div area is for inputing new user's information. -->
+        <fieldset id="div_new_user_fieldset">
+            <legend id="div_new_user_legend">Please input new user's information</legend>
+        </fieldset>
         <div id="div_new_user">
-            <fieldset id="div_new_user_fieldset">
-                <legend id="div_new_user_legend">Please input new user's information</legend>
-                <form action="UserAdd" method="post">
-                    <table cellpadding="4">
+            
+                <form action="UserAdd" method="post" class="form-horizontal">
+<!--                    <table cellpadding="4">
                         <tr>
                             <td align="right">User Name</td>
                             <td align="left"><input type="text" name="userName" id="text_user_name"/></td>
@@ -51,12 +55,55 @@
                                 </select>
                             </td>
                         </tr>
-                    </table>
-                    <input type="submit" name="addUser" value="Add" class="submit_add_user"/>
-                    <input id="id_button_clear" type="button" value="clear" onclick="clearUserText()"/>
-                    <input type="submit" name="Back" value="Back" class="submit_add_user"/>
+                    </table>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">User Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="userName" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email Address</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="userEmail" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Confirm Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="passwordConfirm" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Security Answer</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="userAnswer" class="form-control"  />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">User's Role</label>
+                        <div class="col-sm-10">
+                            <select name="userRank" class="form-control">
+                                    <option value="admin" >Admin</option>
+                                    <option value="client" selected>Client</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" name="addUser" value="Add" class="btn btn-default"/>
+                            <input type="reset" value="Clear" class="btn btn-default"/>
+                            <input type="submit" name="Back" value="Back" class="btn btn-default"/>
+                        </div>
+                    </div>
                 </form>
-            </fieldset>
+            <!--</fieldset>-->
         </div>
         <script type="text/javascript" src="js/adminScript.js"></script>
     </body>

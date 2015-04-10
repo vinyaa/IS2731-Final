@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,7 @@ import models.user.UserRole;
  *
  * @author yanma
  */
-public class MessageCreateController extends HttpServlet {
+public class MessageEditController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +45,7 @@ public class MessageCreateController extends HttpServlet {
             requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");    
             requestDispatcher.forward(request, response);
         } 
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,15 +79,17 @@ public class MessageCreateController extends HttpServlet {
         UserManager userManager = new UserManager();
         
         String errorMessage = null;
-        String actionCreateMessage = request.getParameter("createMessage");
+        String actionEditMessage = request.getParameter("editMessage");
         String actionBack = request.getParameter("Back");
         
-        String receiver = request.getParameter("receiver");
-        String sender = request.getParameter("sender");
-        String content = request.getParameter("messageContent");        
+        String content = request.getParameter("messageContent"); 
+        HttpSession session = request.getSession();
+        String sender = session.getAttribute("userName").toString();
         
-        if(actionCreateMessage !=null && actionCreateMessage.equals("Send Message")) {
-            messageManager.createMessage(sender, receiver, content);
+        int mid = Integer.valueOf(request.getParameter("mid"));
+        
+        if(actionEditMessage !=null && actionEditMessage.equals("Confirm Edit")) {
+            messageManager.updateMessageContent(mid, content);
             request.setAttribute("sender", sender);
             List<Message> allMessageList = messageManager.listAllMessage(sender);
             request.setAttribute("allMessageList", allMessageList);
@@ -96,13 +97,10 @@ public class MessageCreateController extends HttpServlet {
             requestDispatcher.forward(request, response);
         }
         else if(actionBack != null && actionBack.equals("Back")) {
-            List<User> allUsersList = userManager.listAllUsers();
-            List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
-            int allUsersCount = userManager.getUsersCount();
-            request.setAttribute("allUsersList", allUsersList);
-            request.setAttribute("allUserRoleList", allUserRoleList);
-            request.setAttribute("allUsersCount", allUsersCount);
-            requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+            request.setAttribute("sender", sender);
+            List<Message> allMessageList = messageManager.listAllMessage(sender);
+            request.setAttribute("allMessageList", allMessageList);
+            requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
             requestDispatcher.forward(request, response);
         }
         else {

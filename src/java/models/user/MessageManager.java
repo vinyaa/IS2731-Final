@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package models.user;
 
 import java.util.Calendar;
@@ -43,5 +48,19 @@ public class MessageManager {
     }
     
     
+    public boolean updateMessageContent (int mid, String content) {
+        return this.userDBManager.updateMessageContent(mid, content);
+    }
     
+    public Message findMessage(int mid) {
+        return this.userDBManager.findMessage(mid);
+    }
+    
+    public boolean deleteMessageBySender(User sender, int mid) {
+        return this.userDBManager.deleteMessageBySender(sender, mid);
+    }
+    
+    public boolean updateMessageToRead(int mid) {
+        return this.userDBManager.updateMessageToRead(mid);
+    }
 }

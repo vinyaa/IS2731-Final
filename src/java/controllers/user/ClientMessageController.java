@@ -10,22 +10,19 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.user.Message;
 import models.user.MessageManager;
-import models.user.User;
 import models.user.UserManager;
-import models.user.UserRole;
 
 /**
  *
  * @author yanma
  */
-public class MessageCreateController extends HttpServlet {
+public class ClientMessageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,9 @@ public class MessageCreateController extends HttpServlet {
         //validate session first
         HttpSession session = request.getSession(false);
         if(session.getAttribute("sesssionCode") == null) {
-            requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");    
-            requestDispatcher.forward(request, response);
-        } 
-
+            requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");
+            requestDispatcher.forward(request, response);      
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,38 +73,38 @@ public class MessageCreateController extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
         MessageManager messageManager = new MessageManager();
-        UserManager userManager = new UserManager();
+        int mid = Integer.valueOf(request.getParameter("mid"));
         
-        String errorMessage = null;
-        String actionCreateMessage = request.getParameter("createMessage");
-        String actionBack = request.getParameter("Back");
+        String actionShowMessage = request.getParameter("showMessage");
+        String actionMarkRead = request.getParameter("markRead");
+        String actionBack = request.getParameter("back");
         
-        String receiver = request.getParameter("receiver");
-        String sender = request.getParameter("sender");
-        String content = request.getParameter("messageContent");        
-        
-        if(actionCreateMessage !=null && actionCreateMessage.equals("Send Message")) {
-            messageManager.createMessage(sender, receiver, content);
-            request.setAttribute("sender", sender);
-            List<Message> allMessageList = messageManager.listAllMessage(sender);
-            request.setAttribute("allMessageList", allMessageList);
-            requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
+        if (actionShowMessage != null && actionShowMessage.equals("Show Message")) {
+            request.setAttribute("mid", mid);
+            requestDispatcher = request.getRequestDispatcher("/client/clientReadMessage.jsp");
             requestDispatcher.forward(request, response);
-        }
-        else if(actionBack != null && actionBack.equals("Back")) {
-            List<User> allUsersList = userManager.listAllUsers();
-            List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
-            int allUsersCount = userManager.getUsersCount();
-            request.setAttribute("allUsersList", allUsersList);
-            request.setAttribute("allUserRoleList", allUserRoleList);
-            request.setAttribute("allUsersCount", allUsersCount);
-            requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+            
+        } else if (actionMarkRead != null && actionMarkRead.equals("Mark As Read")) {
+            messageManager.updateMessageToRead(mid);
+            Message message = messageManager.findMessage(mid);
+            request.setAttribute("client", message.getReceiver());
+            List<Message> receiverMessageList = messageManager.queryAllMessagesForReceiver(message.getReceiver());
+            request.setAttribute("receiverMessageList", receiverMessageList);
+            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");
             requestDispatcher.forward(request, response);
-        }
-        else {
+        } else if (actionBack != null && actionBack.equals("Back")) {
+            Message message = messageManager.findMessage(mid);
+            request.setAttribute("client", message.getReceiver());
+            List<Message> receiverMessageList = messageManager.queryAllMessagesForReceiver(message.getReceiver());
+            request.setAttribute("receiverMessageList", receiverMessageList);
+            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
             requestDispatcher = request.getRequestDispatcher("/error404.jsp");
             requestDispatcher.forward(request, response);
         }
+        
+        
     }
 
     /**

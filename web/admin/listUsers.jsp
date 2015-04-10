@@ -22,12 +22,12 @@
         <div class="error_message"><p><b><%=request.getAttribute("errorMessage")%></b></p></div>   
         <% }      
         else if(request.getAttribute("allUsersCount") != null) { 
-             if(request.getAttribute("registerMessage") != null) { %>
-                <div class="register_message"><p><b><%=request.getAttribute("registerMessage")%></b></p></div>   
-            <% }  
             if(request.getAttribute("activationMessage") != null) { %>
                 <div class="activation_message"><p><b><%=request.getAttribute("activationMessage")%></b></p></div>   
-            <% } %>  
+            <% }
+            if(request.getAttribute("register_message") != null) { %>
+                <div class="register_message"><p><b><%=request.getAttribute("register_message")%></b></p></div>   
+            <% } %>
             <div class="div_system_title">
                 <% int allUsersCount = (Integer)request.getAttribute("allUsersCount"); %>
                 <!--<p>There are <%=allUsersCount%> users.</p>-->
@@ -40,7 +40,7 @@
                     <tr>  
                         <th>User Name</th>
                         <th>User Email</th>
-                        <th>User Rank</th> 
+                        <th>User Rank</th>
                         <th>User Status</th>
                         <th colspan="3">Operations</th>
                     </tr>  
@@ -58,14 +58,14 @@
                                 <tr>
                                     <td><%=user.getUserName()%></td>  
                                     <td><%=user.getEmail()%></td>
-                                    <td><%=roles%></td>  
-                                    <% if(user.getIsActivated() == 0){ %>
-                                        <td><b style="color: #cc0000">Not Activated</b></td>
-                                    <% }
-                                    else if(user.getIsActivated() == 1){ %>
-                                        <td><b style="color: #009966">Activated</b></td>
+                                    <td><%=roles%></td>
+                                    <% if(user.getIsActivated() == 0) { %>
+                                        <td id="td_not_activated">Not Activated</td> 
+                                    <% } 
+                                    else if(user.getIsActivated() == 1) {%>
+                                        <td id="td_activated">Activated</td> 
                                     <% } %>
-                                    <td style="padding-left: 15px; padding-right: 15px;">  
+                                    <td style="padding-left: 5px; padding-right: 5px;">  
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>
                                             <!--<input type="submit" name="editUser" value="Edit" class="submit" />-->   
@@ -80,10 +80,10 @@
                                         </form>
                                     </td> 
                                     <td style="padding-left: 5px; padding-right: 5px;">
-                                        <form action="MessageCreate" method="post">
+                                        <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>
                                             <!--<input type="submit" name="sendMessage" value="Send Message" class="submit"/>-->     
-                                            <input type="submit" name="sendMessage" value="Send Message" class="btn btn-xs btn-info"/>     
+                                            <input type="submit" name="createMessage" value="Send Message" class="btn btn-xs btn-info"/>     
                                         </form>
                                     </td> 
                                 </tr>  
@@ -98,6 +98,7 @@
                 <form action="UserList" method="post" >
                     <!--<input type="submit" name="addUser" value="Add User" class="submit_list_users_add"/>-->
                     <input type="submit" name="addUser" value="Add User" class="btn btn-primary"/>
+                    <input type="submit" name="listMessage" value="List Messages" class="btn btn-info"/>
                     <!--<input type="submit" name="logOut" value="Log Out" class="submit_list_users_log_out"/>-->
                     <input type="submit" name="logOut" value="Log Out" class="btn btn-warning"/>
                 </form>

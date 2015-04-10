@@ -25,6 +25,7 @@
             <legend id="div_login_legend">Please input user information</legend>
         </fieldset>
         <div id="div_login">
+
             <form action="login" method="post"  class="form-horizontal" >
                 <div class="form-group">
                     <label class="col-sm-2 control-label">User Name</label>
@@ -63,6 +64,7 @@
             <form action="login" method="post">
                     <input type="submit" name="register" value="Register" style="width: 60px"/>
             </form>
+        <!--</fieldset>-->
         </div>
         <script type="text/javascript" src="js/adminScript.js"></script>
     </body>

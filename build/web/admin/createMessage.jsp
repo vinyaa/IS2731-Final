@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="models.user.User"%>
+<%@page import="javax.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@
     <body>
         <% User receiver = (User)request.getAttribute("receiver"); 
            String receiverName = receiver.getUserName();
+           String senderName = request.getAttribute("sender").toString();
         %>
         <% if (receiver != null) { %>
             <div class="div_system_title">
@@ -28,19 +30,27 @@
             <div id="div_current_user">
                 <form action="MessageCreate" method="post" class="form-horizontal" >
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">User Name</label>
+                        <label class="col-sm-2 control-label">From: </label>
                         <div class="col-sm-10">
-                            <input type="text" name="receiver" value="<%=receiver.getUserName()%>" class="form-control"  />
+                            <input type="text" name="sender" value="<%=senderName%>" class="form-control" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">To: </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="receiver" value="<%=receiver.getUserName()%>" class="form-control" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Message Content</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="3" name="messageContent"></textarea>
+                            <textarea class="form-control" rows="5" name="messageContent" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
+                            <input type="hidden" name="sender" value="<%=senderName%>" class="form-control" />
+                            <input type="hidden" name="receiver" value="<%=receiver.getUserName()%>" class="form-control" />
                             <input type="submit" name="createMessage" value="Send Message" class="btn btn-default"/>
                             <input type="reset" value="Clear" class="btn btn-default"/>
                             <input type="submit" name="Back" value="Back" class="btn btn-default"/>
@@ -60,6 +70,6 @@
         %>
         
            
-        <h1>Hello World!</h1>
+       
     </body>
 </html>

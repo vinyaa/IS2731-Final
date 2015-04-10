@@ -16,7 +16,7 @@ public class Message implements Serializable{
     private int mid;
     private String sender;
     private String receiver;
-    private java.sql.Timestamp time;
+    private Timestamp time;
     private String content;
     private int is_read;
 

@@ -16,8 +16,21 @@ input.form-control {
     width: 35%;
 }
 
+.form-group input[type=submit], input[type=reset] {
+    margin-right: 20px;
+}
+
+#two-buttons input[type=submit], input[type=reset] {
+    margin-right: 20px;
+}
+
 select.form-control {
     width: 35%;
+}
+
+textarea.form-control {
+    width: 35%; 
+    resize: none;
 }
 
 #div_login{
@@ -91,8 +104,12 @@ select.form-control {
     width:80%;		
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }	 
 
+#div_users_list th {
+    text-align: center;
+}
 #two-buttons{
     text-align: center;
 }
@@ -105,15 +122,6 @@ select.form-control {
     margin-left: 25%;
     margin-right: 40px;*/
 
-}
-
-.submit_register {
-    font-size: 15px;
-    height: 30px;
-    width: 70px;
-    color: #000066;
-    margin-left: 25%;
-    margin-right: 40px;
 }
 
 .submit_backlog {
@@ -175,6 +183,7 @@ select.form-control {
     color: #cc0000;
 }
 
+
 .register_message {
     text-align: center;
     font-family: calibri;
@@ -187,7 +196,12 @@ select.form-control {
     color: #009966;
 }
 
+#td_not_activated {
+    color: #cc0000;
+    font-weight: bold;
+}
 
-
-
-
+#td_activated {
+    color: #009966;
+    font-weight: bold;
+}

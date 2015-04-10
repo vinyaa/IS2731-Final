@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.user.Message;
+import models.user.MessageManager;
 import models.user.User;
 import models.user.UserManager;
 import models.user.UserRole;
@@ -72,12 +74,19 @@ public class UserListController extends HttpServlet {
         
         RequestDispatcher requestDispatcher;
         UserManager userManager = new UserManager();
+        MessageManager messageManager = new MessageManager();
         User currentUser;
+        User receiver;
         
         String actionAddUser = request.getParameter("addUser");
         String actionEditUser = request.getParameter("editUser");
         String actionRemoveUser = request.getParameter("removeUser");
         String actionLogOut = request.getParameter("logOut");
+        
+        String actionListMessage = request.getParameter("listMessage");
+        String actionCreateMessage = request.getParameter("createMessage");
+        String actionEditMessage = request.getParameter("editMessage");
+        String actionRemoveMessage = request.getParameter("removeMessage");
         
         if(actionAddUser !=null && actionAddUser.equals("Add User")) {
             requestDispatcher = request.getRequestDispatcher("/admin/addUser.jsp");
@@ -105,6 +114,57 @@ public class UserListController extends HttpServlet {
                 request.setAttribute("allUserRoleList", allUserRoleList);
                 request.setAttribute("allUsersCount", allUsersCount);
                 requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+                requestDispatcher.forward(request, response);
+            }   
+        }
+        else if(actionListMessage !=null && actionListMessage.equals("List Messages")) {
+            HttpSession session = request.getSession();
+            String userName = session.getAttribute("userName").toString();
+            if(userName != null){
+
+                List<Message> allMessageList = messageManager.listAllMessage(userName);
+                request.setAttribute("allMessageList", allMessageList);
+                request.setAttribute("sender", userName);
+                requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
+                requestDispatcher.forward(request, response);
+            }   
+            
+            
+        }
+        else if (actionCreateMessage != null && actionCreateMessage.equals("Send Message")) {
+            String userName = request.getParameter("userName");
+            if(userName != null){
+                receiver = userManager.findUser(userName);
+                request.setAttribute("receiver", receiver);
+                HttpSession session = request.getSession();
+                String senderName = session.getAttribute("userName").toString();
+                request.setAttribute("sender", senderName);
+                requestDispatcher = request.getRequestDispatcher("/admin/createMessage.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        }
+        else if(actionEditMessage !=null && actionEditMessage.equals("Edit Message")) {
+            int mid = Integer.valueOf(request.getParameter("mid"));
+            if(mid != 0){
+                request.setAttribute("mid", mid);
+                requestDispatcher = request.getRequestDispatcher("/admin/editMessage.jsp");
+                requestDispatcher.forward(request, response);
+            }   
+            
+            
+        }
+        else if(actionRemoveMessage != null && actionRemoveMessage.equals("Remove Message")) {
+            int mid = Integer.valueOf(request.getParameter("mid"));
+            HttpSession session = request.getSession();
+            String senderName = session.getAttribute("userName").toString();
+            User sender = userManager.findUser(senderName);
+            if(mid != 0 && sender != null){
+                messageManager.deleteMessageBySender(sender, mid);
+
+                List<Message> allMessageList = messageManager.listAllMessage(senderName);
+                request.setAttribute("allMessageList", allMessageList);
+                request.setAttribute("sender", senderName);
+                requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
                 requestDispatcher.forward(request, response);
             }   
         }

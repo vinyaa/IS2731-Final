@@ -10,22 +10,20 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.user.Message;
-import models.user.MessageManager;
 import models.user.User;
 import models.user.UserManager;
 import models.user.UserRole;
+import models.user.UserValidator;
 
 /**
  *
  * @author yanma
  */
-public class MessageCreateController extends HttpServlet {
+public class MessageListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,8 +43,19 @@ public class MessageCreateController extends HttpServlet {
         if(session.getAttribute("sesssionCode") == null) {
             requestDispatcher = request.getRequestDispatcher("/loginReminder.jsp");    
             requestDispatcher.forward(request, response);
-        } 
-
+        }   
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet MessageListController</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet MessageListController at " + request.getContextPath() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,26 +85,13 @@ public class MessageCreateController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
-        MessageManager messageManager = new MessageManager();
         UserManager userManager = new UserManager();
-        
         String errorMessage = null;
-        String actionCreateMessage = request.getParameter("createMessage");
-        String actionBack = request.getParameter("Back");
         
-        String receiver = request.getParameter("receiver");
-        String sender = request.getParameter("sender");
-        String content = request.getParameter("messageContent");        
+        String actionListUser = request.getParameter("listUser");
+        String actionLogOut = request.getParameter("logOut");
         
-        if(actionCreateMessage !=null && actionCreateMessage.equals("Send Message")) {
-            messageManager.createMessage(sender, receiver, content);
-            request.setAttribute("sender", sender);
-            List<Message> allMessageList = messageManager.listAllMessage(sender);
-            request.setAttribute("allMessageList", allMessageList);
-            requestDispatcher = request.getRequestDispatcher("/admin/listMessages.jsp");
-            requestDispatcher.forward(request, response);
-        }
-        else if(actionBack != null && actionBack.equals("Back")) {
+        if(actionListUser != null && actionListUser.equals("List Users")) {
             List<User> allUsersList = userManager.listAllUsers();
             List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
             int allUsersCount = userManager.getUsersCount();
@@ -105,10 +101,17 @@ public class MessageCreateController extends HttpServlet {
             requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
             requestDispatcher.forward(request, response);
         }
+        else if(actionLogOut != null && actionLogOut.equals("Log Out")) {
+            HttpSession session=request.getSession(false);  
+            session.invalidate();
+            requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            requestDispatcher.forward(request, response);
+        }
         else {
             requestDispatcher = request.getRequestDispatcher("/error404.jsp");
             requestDispatcher.forward(request, response);
         }
+                
     }
 
     /**

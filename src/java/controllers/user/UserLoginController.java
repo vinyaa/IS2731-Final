@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.user.Message;
+import models.user.MessageManager;
 import models.user.SessionManager;
 import models.user.User;
 import models.user.UserManager;
@@ -90,6 +92,7 @@ public class UserLoginController extends HttpServlet {
             if(isLegalUser == true) {
                 HttpSession session = request.getSession();
                 String sesionCode = SessionManager.generateSessionCode(userName);
+                session.setAttribute("userName", userName);
                 session.setAttribute("sesssionCode",sesionCode); 
                 //session will be expired after 30 mins
                 session.setMaxInactiveInterval(60 * 30);
@@ -113,6 +116,10 @@ public class UserLoginController extends HttpServlet {
                     requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
                 }
                 else {
+                    request.setAttribute("client", userName);
+                    MessageManager messageManager = new MessageManager();
+                    List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
+                    request.setAttribute("receiverMessageList", messageList);
                     requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");  
                 }   
             } 

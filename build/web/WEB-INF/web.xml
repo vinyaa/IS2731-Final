@@ -4,9 +4,33 @@
         <servlet-name>MessageCreate</servlet-name>
         <servlet-class>controllers.user.MessageCreateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MessageListController</servlet-name>
+        <servlet-class>controllers.user.MessageListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MessageEditController</servlet-name>
+        <servlet-class>controllers.user.MessageEditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientMessageController</servlet-name>
+        <servlet-class>controllers.user.ClientMessageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MessageCreate</servlet-name>
         <url-pattern>/MessageCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageListController</servlet-name>
+        <url-pattern>/MessageList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageEditController</servlet-name>
+        <url-pattern>/MessageEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientMessageController</servlet-name>
+        <url-pattern>/ClientMessage</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

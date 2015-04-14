@@ -1,4 +1,4 @@
-package models.public_key;
+package models.encryption;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

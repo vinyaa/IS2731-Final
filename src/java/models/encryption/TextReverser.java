@@ -9,6 +9,10 @@ public class TextReverser {
     
     //length is the required length (number of bytes) of the output   
     public static byte[] getReversedText(String originalString, int length) {
+        //the the length of input String
+        if(originalString.length() > length)
+            return null;
+        
         byte[] byteText = new byte[length];
         //copy the original string byte by byte
         System.arraycopy(originalString.getBytes(), 0, byteText, 0, originalString.getBytes().length);

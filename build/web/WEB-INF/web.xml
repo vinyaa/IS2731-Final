@@ -71,4 +71,5 @@
         <filter-name>ClientPathFilter</filter-name>
         <url-pattern>/client/*</url-pattern>
     </filter-mapping>
+		
 </web-app>

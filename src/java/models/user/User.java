@@ -13,6 +13,7 @@ public class User implements Serializable{
     private String email;
     private String hashedAnswer;
     private int isActivated;
+    private String publicKey;
     
     public String getUserName() {
         return userName;
@@ -53,5 +54,15 @@ public class User implements Serializable{
     public void setIsActivated(int isActivated) {
         this.isActivated = isActivated;
     }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+    
+    
 
 }

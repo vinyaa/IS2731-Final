@@ -242,6 +242,48 @@ public class UserDBManager {
         return addResult; 
     }
     
+    
+    /**
+     * add public key when first time generate key pair
+     */
+    public boolean addPublickKey(String userName, String publicKey) {
+        boolean addResult = false;
+        String sql = "UPDATE users SET pubkey = ? WHERE user_name = ?";
+        try {
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setString(1, publicKey);
+            this.statement.setString(2, userName);
+            this.statement.executeUpdate();
+            addResult = true;
+            this.connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return addResult;
+    }
+    
+    /**
+     * find receiver's public key when admin wants to send message
+     */
+    public String findPublicKey(String receiverName) {
+        String publicKey = "";
+        String sql = "SELECT * FROM users WHERE user_name = ?";
+        try {
+            this.statement = connection.prepareStatement(sql);
+            this.statement.setString(1, receiverName);
+            this.resultSet = this.statement.executeQuery();
+            while(this.resultSet.next()) {
+                publicKey = this.resultSet.getString("pubkey");
+            }	
+            this.statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return publicKey;
+    }
+    
     /*
     * Update user's information
     */

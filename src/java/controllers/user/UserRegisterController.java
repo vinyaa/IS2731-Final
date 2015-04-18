@@ -73,19 +73,19 @@ public class UserRegisterController extends HttpServlet {
         UserManager userManager = new UserManager();
         
         String action = request.getParameter("action"); 
-        String userName = request.getParameter("userName");
+        String client = request.getParameter("client");
         String token = request.getParameter("token");
         //validate activation token
         HttpSession session = request.getSession(false);
         String sessionToken = session.getAttribute("sessionToken").toString();
         if(sessionToken != null && sessionToken.equals(token)) {
             //activate user
-            userManager.changeActivation(userName, 1);
-            String activationMessage = userName + " has been succesfully activated!";
+            userManager.changeActivation(client, 1);
+            String activationMessage = client + " has been succesfully activated!";
             request.setAttribute("activationMessage", activationMessage);
         }   
         else {
-            String errorMessage = "Failed to activate " + userName + "!";
+            String errorMessage = "Failed to activate " + client + "!";
             request.setAttribute("errorMessage", errorMessage);
             requestDispatcher = request.getRequestDispatcher("/login.jsp");    
             requestDispatcher.forward(request, response);
@@ -104,11 +104,13 @@ public class UserRegisterController extends HttpServlet {
 
         String mypublic = javax.xml.bind.DatatypeConverter.printBase64Binary(publicBytes);
         String myprivate = javax.xml.bind.DatatypeConverter.printBase64Binary(privateBytes);
+        request.setAttribute("mypublic", mypublic);
         request.setAttribute("myprivate", myprivate);
             
         List<User> allUsersList = userManager.listAllUsers();
         List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
         int allUsersCount = userManager.getUsersCount();
+        request.setAttribute("client", client);
         request.setAttribute("allUsersList", allUsersList);
         request.setAttribute("allUserRoleList", allUserRoleList);
         request.setAttribute("allUsersCount", allUsersCount);
@@ -158,7 +160,7 @@ public class UserRegisterController extends HttpServlet {
                     session.setMaxInactiveInterval(60 * 60);
                     //send this token as URL to user's email address
                     URL url = new URL("http://localhost:8084/is2731_final/register?"
-                                    + "userName="+userName+"&token="+sessionToken+""
+                                    + "client="+userName+"&token="+sessionToken+""
                                     + "&action=Activate");
                     EmailNotifier emailNotifier = new EmailNotifier();
                     emailNotifier.sendMail(userEmail, "Activate Your Account", url.toString());

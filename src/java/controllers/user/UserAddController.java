@@ -2,6 +2,7 @@ package controllers.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.email.EmailNotifier;
+import models.randomizer.Randomizer;
 import models.user.User;
 import models.user.UserManager;
 import models.user.UserRole;
@@ -73,6 +76,7 @@ public class UserAddController extends HttpServlet {
         UserManager userManager = new UserManager();
         UserValidator userValidator = new UserValidator();
         String errorMessage = null;
+        String registerMessage = null;
         
         String actionAddUser = request.getParameter("addUser");
         String actionBack = request.getParameter("Back");
@@ -89,8 +93,24 @@ public class UserAddController extends HttpServlet {
                password.equals(passwordConfirm) && userRank != null) {
                 //validate the format of userName and password
                 if(userValidator.validateUserName(userName) == true &&
-                   userValidator.validateUserPassword(password) == true)
+                   userValidator.validateUserPassword(password) == true) {
                     userManager.addUser(userName, password, userEmail, userAnswer, userRank);
+                    //generate session token for confirming registration
+                    HttpSession session = request.getSession();
+                    String sessionToken = Randomizer.getRandomToken();
+                    session.setAttribute("sessionToken",sessionToken); 
+                    //token will be expired after 60 mins
+                    session.setMaxInactiveInterval(60 * 60);
+                    //send this token as URL to user's email address
+                    URL url = new URL("http://localhost:8084/is2731_final/register?"
+                                    + "client="+userName+"&token="+sessionToken+""
+                                    + "&action=Activate");
+                    EmailNotifier emailNotifier = new EmailNotifier();
+                    emailNotifier.sendMail(userEmail, "Activate Your Account", url.toString());
+                    
+                    registerMessage = "A confirmation Email has been sent to user's email address. "
+                                    + "Please click the link in the email to finish registration.";
+                }
                 else {
                     errorMessage = "User name should be no more than 20 characters, "
                                         + "consisting of letters in upper/lower case and "
@@ -103,6 +123,7 @@ public class UserAddController extends HttpServlet {
             request.setAttribute("allUsersList", allUsersList);
             request.setAttribute("allUserRoleList", allUserRoleList);
             request.setAttribute("allUsersCount", allUsersCount);
+            request.setAttribute("registerMessage", registerMessage);
             request.setAttribute("errorMessage", errorMessage);
             requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
             requestDispatcher.forward(request, response);

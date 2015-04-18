@@ -81,6 +81,7 @@ public class UserLoginController extends HttpServlet {
         String actionLogin = request.getParameter("login");
         String actionRegister = request.getParameter("register");
         String actionBack = request.getParameter("backToLogin");
+        String actionPasscode = request.getParameter("submitPass");
         
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
@@ -117,10 +118,7 @@ public class UserLoginController extends HttpServlet {
                 }
                 else {
                     request.setAttribute("client", userName);
-                    MessageManager messageManager = new MessageManager();
-                    List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
-                    request.setAttribute("receiverMessageList", messageList);
-                    requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");  
+                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscode.jsp");  
                 }   
             } 
             else {
@@ -132,6 +130,13 @@ public class UserLoginController extends HttpServlet {
         }
         else if(actionBack != null) {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        }
+        else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {
+            request.setAttribute("client", userName);
+            MessageManager messageManager = new MessageManager();
+            List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
+            request.setAttribute("receiverMessageList", messageList);
+            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");  
         }
         else {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");

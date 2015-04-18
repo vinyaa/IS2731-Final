@@ -21,7 +21,7 @@ public class UserDBManager {
     private ResultSet resultSet;
 
     public UserDBManager() {
-        databaseURL = "jdbc:mysql://localhost:3306/is2731";
+        databaseURL = "jdbc:mysql://localhost:8889/is2731";
         dbUserName = "is2731";
         dbPassword = "is2731";
         try {

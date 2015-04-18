@@ -12,6 +12,50 @@
     margin-top: 50px;
 }
 
+
+.form-group input[type=submit], input[type=reset] {
+    margin-right: 20px;
+}
+
+#two-buttons input[type=submit], input[type=reset] {
+    margin-right: 20px;
+}
+
+select.form-control {
+    width: 35%;
+}
+
+textarea.form-control {
+    width: 35%; 
+    resize: none;
+}
+
+#div_login_fieldset {
+    border-color: #0099cc;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 50px;
+}
+
+#div_login_passcode {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#div_login_passcode .form-horizontal label{
+    width: 300px;
+}
+
+#div_login_passcode .form-horizontal input.form-control {
+    width: 50%;
+}
+
+#div_login_passcode .form-horizontal div.form-group div.col-sm-offset-2 {
+    margin-left: 300px;
+}
+
 .error_message {
     text-align: center;
     font-family: calibri;
@@ -165,7 +209,6 @@
     margin-right: auto;
     text-align: center;
 }
-
 
 #table_messagelist th {
     text-align: center;

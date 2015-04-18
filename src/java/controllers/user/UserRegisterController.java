@@ -160,15 +160,16 @@ public class UserRegisterController extends HttpServlet {
                                         + "numbers. Password should be no more than 20 characters.";
                 }
             }
-            List<User> allUsersList = userManager.listAllUsers();
-            List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
-            int allUsersCount = userManager.getUsersCount();
-            request.setAttribute("allUsersList", allUsersList);
-            request.setAttribute("allUserRoleList", allUserRoleList);
-            request.setAttribute("allUsersCount", allUsersCount);
-            request.setAttribute("registerMessage", registerMessage);
-            request.setAttribute("errorMessage", errorMessage);
-            requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+//            List<User> allUsersList = userManager.listAllUsers();
+//            List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
+//            int allUsersCount = userManager.getUsersCount();
+//            request.setAttribute("allUsersList", allUsersList);
+//            request.setAttribute("allUserRoleList", allUserRoleList);
+//            request.setAttribute("allUsersCount", allUsersCount);
+//            request.setAttribute("registerMessage", registerMessage);
+//            request.setAttribute("errorMessage", errorMessage);
+//            requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");
+            requestDispatcher = request.getRequestDispatcher("/login.jsp");
             requestDispatcher.forward(request, response);
         }
         else {

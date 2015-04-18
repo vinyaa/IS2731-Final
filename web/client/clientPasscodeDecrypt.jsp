@@ -1,6 +1,6 @@
 <%-- 
-    Document   : clientPasscodeEncrypt
-    Created on : Apr 13, 2015, 4:14:25 PM
+    Document   : clientPasscodeDecrypt
+    Created on : Apr 18, 2015, 3:12:06 PM
     Author     : yanma
 --%>
 
@@ -9,21 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="js/utilities.js"/>
-        <script type="text/javascript" src="js/cryptojs/rollups/aes.js"/>
         <link rel="stylesheet" href="css/client_style.css" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <title>Client First Passcode Encryption Page</title>
+        <title>Decrypt your private key</title>
     </head>
     <body>
-        <% String username = request.getAttribute("client").toString();
-           String myprivate = "";
-           if(request.getAttribute("myprivate") != null) {
-               myprivate = request.getAttribute("myprivate").toString();
-           }
-        %>
-        <div id='myprivate' style='visibility: hidden'><%=myprivate%></div>
-        <div onload="getKey()"></div>
+        <% String username = request.getAttribute("client").toString();%>
         <div class="div_system_title">
             <h1><b>Passcode</b></h1>
         </div>
@@ -40,15 +31,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-10">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Confirm Passcode</label>
-                        <input type="password" name="confirm_passcode" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <input type="hidden" name="userName" value="<%=username %>" />
-                        <input type="submit" name="submitPass" class="btn btn-default" value="Confirm Passcode" />
+                        <input type="submit" name="passDecrypt" class="btn btn-default" value="Confirm Passcode" />
                         <input type="reset" value="Clear" class="btn btn-default"/>
                         <a href="login.jsp" ><input type="button" value="Back" class="btn btn-default" /></a>
                     </div>
@@ -56,6 +41,7 @@
                 
             </form>
         </div>
+        
         
     </body>
 </html>

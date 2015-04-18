@@ -81,6 +81,7 @@ public class UserLoginController extends HttpServlet {
         String actionRegister = request.getParameter("register");
         String actionBack = request.getParameter("backToLogin");
         String actionPasscode = request.getParameter("submitPass");
+        String actionPasscodeDecrypt = request.getParameter("passDecrypt");
         
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
@@ -117,7 +118,14 @@ public class UserLoginController extends HttpServlet {
                 }
                 else {
                     request.setAttribute("client", userName);
-                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");  
+
+                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");
+                    String publicKey = userManager.findPublicKey(userName);
+                    if (publicKey.equals("")) {
+                        requestDispatcher = request.getRequestDispatcher("/alertConfirmEmail.jsp");      
+                    } else {
+                        requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeDecrypt.jsp");  
+                    }
                 }   
             } 
             else {
@@ -130,13 +138,28 @@ public class UserLoginController extends HttpServlet {
         else if(actionBack != null) {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");
         }
-        else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {    
+
+        else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {
+            /**
+             * decrypt messages
+             */
             request.setAttribute("client", userName);
             MessageManager messageManager = new MessageManager();
             List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
             request.setAttribute("receiverMessageList", messageList);
             requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");  
         }
+        else if (actionPasscodeDecrypt != null && actionPasscodeDecrypt.equals("Confirm Passcode")) {
+            /******
+             * add decrypt message functions
+             */
+            request.setAttribute("client", userName);
+            MessageManager messageManager = new MessageManager();
+            List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
+            request.setAttribute("receiverMessageList", messageList);
+            requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");  
+        }
+        
         else {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");
         }

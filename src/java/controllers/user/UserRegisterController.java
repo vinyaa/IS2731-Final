@@ -3,6 +3,9 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.email.EmailNotifier;
+import models.encryption.KeysManager;
 import models.randomizer.Randomizer;
 import models.user.SessionManager;
 import models.user.User;
@@ -83,14 +87,32 @@ public class UserRegisterController extends HttpServlet {
         else {
             String errorMessage = "Failed to activate " + userName + "!";
             request.setAttribute("errorMessage", errorMessage);
+            requestDispatcher = request.getRequestDispatcher("/login.jsp");    
+            requestDispatcher.forward(request, response);
         }
+        //initializing keys
+        PublicKey publicKey;
+        PrivateKey privateKey;
+
+        //generate public and private keys
+        KeyPair keyPair = KeysManager.generateKeyPairs();
+        publicKey = keyPair.getPublic();
+        privateKey = keyPair.getPrivate();
+
+        byte[] publicBytes = publicKey.getEncoded();
+        byte[] privateBytes = privateKey.getEncoded();
+
+        String mypublic = javax.xml.bind.DatatypeConverter.printBase64Binary(publicBytes);
+        String myprivate = javax.xml.bind.DatatypeConverter.printBase64Binary(privateBytes);
+        request.setAttribute("myprivate", myprivate);
+            
         List<User> allUsersList = userManager.listAllUsers();
         List<UserRole> allUserRoleList = userManager.listAllUsersRoles();
         int allUsersCount = userManager.getUsersCount();
         request.setAttribute("allUsersList", allUsersList);
         request.setAttribute("allUserRoleList", allUserRoleList);
         request.setAttribute("allUsersCount", allUsersCount);
-        requestDispatcher = request.getRequestDispatcher("/admin/listUsers.jsp");    
+        requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");    
         requestDispatcher.forward(request, response);
     }
 

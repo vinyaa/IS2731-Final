@@ -22,7 +22,7 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class KeysManager {
     
-    protected static KeyPair generateKeyPairs(){
+    public static KeyPair generateKeyPairs(){
         KeyPairGenerator keyPairGenerator;
         KeyPair keyPair = null;
         try {

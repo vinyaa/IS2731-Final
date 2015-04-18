@@ -2,7 +2,6 @@ package controllers.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -118,7 +117,7 @@ public class UserLoginController extends HttpServlet {
                 }
                 else {
                     request.setAttribute("client", userName);
-                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscode.jsp");  
+                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");  
                 }   
             } 
             else {
@@ -131,12 +130,12 @@ public class UserLoginController extends HttpServlet {
         else if(actionBack != null) {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");
         }
-        else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {
+        else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {    
             request.setAttribute("client", userName);
             MessageManager messageManager = new MessageManager();
             List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
             request.setAttribute("receiverMessageList", messageList);
-            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");  
+            requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");  
         }
         else {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");

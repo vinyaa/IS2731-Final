@@ -50,6 +50,7 @@
                         if(allUsersList.size() > 0) {  
                             for(User user : allUsersList) {
                                 String roles = "";
+                                String disabled = "";
                                 for(UserRole item : allUserRoleList) {
                                     if(item.getUserName().equals(user.getUserName()))
                                         roles += item.getRoleName() + " | ";
@@ -59,7 +60,8 @@
                                     <td><%=user.getUserName()%></td>  
                                     <td><%=user.getEmail()%></td>
                                     <td><%=roles%></td>
-                                    <% if(user.getIsActivated() == 0) { %>
+                                    <% if(user.getIsActivated() == 0) { 
+                                        disabled = "disabled";%>
                                         <td id="td_not_activated">Not Activated</td> 
                                     <% } 
                                     else if(user.getIsActivated() == 1) {%>
@@ -69,21 +71,21 @@
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>
                                             <!--<input type="submit" name="editUser" value="Edit" class="submit" />-->   
-                                            <input type="submit" name="editUser" value="Edit" class="btn btn-xs btn-default" />  
+                                            <input type="submit" name="editUser" value="Edit User" class="btn btn-xs btn-default" />  
                                         </form> 
                                     </td>  
                                     <td style="padding-left: 5px; padding-right: 5px;">
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>
                                             <!--<input type="submit" name="removeUser" value="Remove" class="submit"/>-->      
-                                            <input type="submit" name="removeUser" value="Remove" class="btn btn-xs btn-danger" />     
+                                            <input type="submit" name="removeUser" value="Remove User" class="btn btn-xs btn-danger" />     
                                         </form>
                                     </td> 
                                     <td style="padding-left: 5px; padding-right: 5px;">
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="userName" value="<%=user.getUserName()%>"/>
                                             <!--<input type="submit" name="sendMessage" value="Send Message" class="submit"/>-->     
-                                            <input type="submit" name="createMessage" value="Send Message" class="btn btn-xs btn-info"/>     
+                                            <input type="submit" name="createMessage" value="Send Message" class="btn btn-xs btn-info" <%=disabled%>/>     
                                         </form>
                                     </td> 
                                 </tr>  

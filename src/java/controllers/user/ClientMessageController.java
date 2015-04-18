@@ -90,14 +90,14 @@ public class ClientMessageController extends HttpServlet {
             request.setAttribute("client", message.getReceiver());
             List<Message> receiverMessageList = messageManager.queryAllMessagesForReceiver(message.getReceiver());
             request.setAttribute("receiverMessageList", receiverMessageList);
-            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");
+            requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");
             requestDispatcher.forward(request, response);
         } else if (actionBack != null && actionBack.equals("Back")) {
             Message message = messageManager.findMessage(mid);
             request.setAttribute("client", message.getReceiver());
             List<Message> receiverMessageList = messageManager.queryAllMessagesForReceiver(message.getReceiver());
             request.setAttribute("receiverMessageList", receiverMessageList);
-            requestDispatcher = request.getRequestDispatcher("/client/clientMain.jsp");
+            requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");
             requestDispatcher.forward(request, response);
         } else {
             requestDispatcher = request.getRequestDispatcher("/error404.jsp");

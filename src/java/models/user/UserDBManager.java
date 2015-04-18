@@ -51,6 +51,7 @@ public class UserDBManager {
 		userResult.setEmail(this.resultSet.getString("email"));
                 userResult.setHashedAnswer(this.resultSet.getString("hashed_answer"));
                 userResult.setIsActivated(this.resultSet.getInt("is_activated"));
+                userResult.setPublicKey(this.resultSet.getString("pubkey"));
             }
             statement.close();
         }
@@ -106,6 +107,7 @@ public class UserDBManager {
 		userResult.setEmail(this.resultSet.getString("email"));
                 userResult.setHashedAnswer(this.resultSet.getString("hashed_answer"));
                 userResult.setIsActivated(this.resultSet.getInt("is_activated"));
+                userResult.setPublicKey(this.resultSet.getString("pubkey"));
             }
             this.statement.close();
         }
@@ -135,6 +137,7 @@ public class UserDBManager {
 		userResult.setEmail(this.resultSet.getString("email"));
                 userResult.setHashedAnswer(this.resultSet.getString("hashed_answer"));
                 userResult.setIsActivated(this.resultSet.getInt("is_activated"));
+                userResult.setPublicKey(this.resultSet.getString("pubkey"));
             }
             this.statement.close();
         }
@@ -161,6 +164,7 @@ public class UserDBManager {
 		user.setEmail(this.resultSet.getString("email"));
                 user.setHashedAnswer(this.resultSet.getString("hashed_answer"));
                 user.setIsActivated(this.resultSet.getInt("is_activated"));
+                user.setPublicKey(this.resultSet.getString("pubkey"));
 		userList.add(user);
             }	
             this.statement.close();
@@ -201,15 +205,16 @@ public class UserDBManager {
     public boolean addUser(User newUser) {
         boolean addResult = false;
 	String sql = "INSERT INTO users"
-                    + "(user_name, hashed_password, email, hashed_answer, is_activated) VALUES"
-                    + "(? , ? , ? , ? , ?)";
+                    + "(user_name, hashed_password, email, hashed_answer, is_activated, pubkey) VALUES"
+                    + "(? , ? , ? , ? , ?, ?)";
     	try {			
             this.statement = connection.prepareStatement(sql);
             this.statement.setString(1, newUser.getUserName());
             this.statement.setString(2, newUser.getHashedPassword());
             this.statement.setString(3, newUser.getEmail());    
             this.statement.setString(4, newUser.getHashedAnswer());    
-            this.statement.setInt(5, newUser.getIsActivated());    
+            this.statement.setInt(5, newUser.getIsActivated()); 
+            this.statement.setString(6, "");
             this.statement.executeUpdate();
             addResult = true;
             this.statement.close();

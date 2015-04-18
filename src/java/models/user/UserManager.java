@@ -51,6 +51,43 @@ public class UserManager {
         }   
     }
     
+    /**
+     * add user public key
+     */
+    public boolean addPublickKey(String userName, String publicKey) {
+        if (userName.equals("") || userName == null) {
+            return false;
+        }
+        try {
+            this.userDBManager.addPublickKey(userName, publicKey);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }    
+    
+    /**
+     * find public key
+     * if return empty string, the user is not activated, show alert message, 
+     * if return non-empty string, the user is activated and has public key
+     * @param receiverName
+     * @return 
+     */
+    public String findPublicKey(String receiverName) {
+        if (receiverName.equals("") || receiverName == null) {
+            return "";
+        }
+        try {
+            return this.userDBManager.findPublicKey(receiverName);
+        } catch (Exception e) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, e);
+            return "";
+        }
+    }
+    
+    
+    
     /*
     * update the user
     */

@@ -205,3 +205,8 @@ textarea.form-control {
     color: #009966;
     font-weight: bold;
 }
+
+div.div_login_eror  {
+    margin-top: 50px;
+    text-align: center;
+}

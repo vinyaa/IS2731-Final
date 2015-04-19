@@ -88,7 +88,9 @@ public class MessageCreateController extends HttpServlet {
         String content = request.getParameter("messageContent");        
         
         if(actionCreateMessage !=null && actionCreateMessage.equals("Send Message")) {
-            messageManager.createMessage(sender, receiver, content);
+            if (!content.equals("")) {
+                messageManager.createMessage(sender, receiver, content);
+            }
             request.setAttribute("sender", sender);
             List<Message> allMessageList = messageManager.listAllMessage(sender);
             request.setAttribute("allMessageList", allMessageList);

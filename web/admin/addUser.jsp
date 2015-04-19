@@ -15,7 +15,6 @@
     </head>
     <body>
         <div class="div_system_title">
-<!--            <b>Add a new user</b>-->
             <h1><b>Add a new user</b></h1>
         </div>
         <!-- This div area is for inputing new user's information. -->
@@ -25,37 +24,7 @@
         <div id="div_new_user">
             
                 <form action="UserAdd" method="post" class="form-horizontal">
-<!--                    <table cellpadding="4">
-                        <tr>
-                            <td align="right">User Name</td>
-                            <td align="left"><input type="text" name="userName" id="text_user_name"/></td>
-                        </tr>
-                        <tr>
-                            <td align="right">Email Address</td>
-                            <td align="left"><input type="text" name="userEmail" id="text_user_email"/></td>
-                        </tr>
-                        <tr>
-                            <td align="right">Password</td>
-                            <td align="left"><input type="password" name="password" id="password_password"/></td>
-                        </tr>
-                        <tr>
-                            <td align="right">Confirm Password</td>
-                            <td align="left"><input type="password" name="passwordConfirm" id="password_password_confirm"/></td>
-                        </tr>
-                        <tr>
-                            <td align="right">Security Answer</td>
-                            <td align="left"><input type="text" name="userAnswer" id="text_user_answer"/></td>
-                        </tr>
-                        <tr>
-                            <td align="right">User's Role</td>
-                            <td align="left">
-                                <select name="userRank" id="select_user_rank">
-                                    <option value="admin">Admin</option>
-                                    <option value="client" selected>Client</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>-->
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">User Name</label>
                         <div class="col-sm-10">
@@ -90,7 +59,7 @@
                         <label class="col-sm-2 control-label">User's Role</label>
                         <div class="col-sm-10">
                             <select name="userRank" class="form-control">
-                                    <option value="admin" >Admin</option>
+                                    <!--<option value="admin" >Admin</option>-->
                                     <option value="client" selected>Client</option>
                             </select>
                         </div>
@@ -103,7 +72,6 @@
                         </div>
                     </div>
                 </form>
-            <!--</fieldset>-->
         </div>
         <script type="text/javascript" src="js/adminScript.js"></script>
     </body>

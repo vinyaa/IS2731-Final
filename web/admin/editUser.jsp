@@ -64,7 +64,7 @@
                         <label class="col-sm-2 control-label">User's Role</label>
                         <div class="col-sm-10">
                             <select name="userRank" class="form-control">
-                                    <option value="admin" >Admin</option>
+                                    <!--<option value="admin" >Admin</option>-->
                                     <option value="client" selected>Client</option>
                             </select>
                         </div>

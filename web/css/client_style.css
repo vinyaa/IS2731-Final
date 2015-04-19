@@ -21,13 +21,24 @@
     margin-right: 20px;
 }
 
+input.form-control {
+    width: 100%;
+}
+
+#div_current_message form.form-horizontal{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
+}
+
 select.form-control {
     width: 35%;
 }
 
 textarea.form-control {
-    width: 35%; 
     resize: none;
+    width: 100%;
 }
 
 #div_login_fieldset {
@@ -218,8 +229,3 @@ textarea.form-control {
     text-align: center;
 }
 
-#div_current_message form.form-horizontal{
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
-}

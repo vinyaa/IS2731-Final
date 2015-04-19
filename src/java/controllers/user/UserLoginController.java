@@ -2,7 +2,9 @@ package controllers.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.encryption.KeysManager;
 import models.user.Message;
 import models.user.MessageManager;
 import models.user.SessionManager;
@@ -86,6 +89,9 @@ public class UserLoginController extends HttpServlet {
         
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        String mypublic = request.getParameter("mypublic");
+        String passcode = request.getParameter("passcode");
+        String confirmPasscode = request.getParameter("confirm_passcode");
 
         RequestDispatcher requestDispatcher;
         UserManager userManager = new UserManager();
@@ -119,6 +125,8 @@ public class UserLoginController extends HttpServlet {
                 }
                 else {
                     request.setAttribute("client", userName);
+
+                    requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");
                     String publicKey = userManager.findPublicKey(userName);
                     if (publicKey.equals("")) {
                         requestDispatcher = request.getRequestDispatcher("/alertConfirmEmail.jsp");  
@@ -137,11 +145,34 @@ public class UserLoginController extends HttpServlet {
         else if(actionBack != null) {
             requestDispatcher = request.getRequestDispatcher("/login.jsp");
         }
+
         else if (actionPasscode != null && actionPasscode.equals("Confirm Passcode")) {
+            if(passcode == null) {
+                //initializing keys
+                PublicKey publicKey;
+                PrivateKey privateKey;
+
+                //generate public and private keys
+                KeyPair keyPair = KeysManager.generateKeyPairs();
+                publicKey = keyPair.getPublic();
+                privateKey = keyPair.getPrivate();
+
+                byte[] publicBytes = publicKey.getEncoded();
+                byte[] privateBytes = privateKey.getEncoded();
+
+                String mypublickey = javax.xml.bind.DatatypeConverter.printBase64Binary(publicBytes);
+                String myprivate = javax.xml.bind.DatatypeConverter.printBase64Binary(privateBytes);
+                request.setAttribute("mypublic", mypublickey);
+                request.setAttribute("myprivate", myprivate);
+                request.setAttribute("client", userName);
+                requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeEncrypt.jsp");  
+            }
             /**
              * decrypt messages
              */
             request.setAttribute("client", userName);
+            //store the public key in database
+            userManager.addPublickKey(userName, mypublic);
             MessageManager messageManager = new MessageManager();
             List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
             request.setAttribute("receiverMessageList", messageList);

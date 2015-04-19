@@ -10,6 +10,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script type="text/javascript" src="js/utilities.js"></script>
+        <script type="text/javascript" src="js/cryptojs/rollups/aes.js"></script>
         <link rel="stylesheet" href="css/client_style.css" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,9 +20,13 @@
     <body>
         <% 
             String receiver = request.getAttribute("client").toString();
+            String passcode = "";
+            if(request.getAttribute("passcode") != null) {
+                passcode = request.getAttribute("passcode").toString();
+            }
         %>
         <% if (receiver != null) { %>
-            <div class="div_system_title">
+            <div class="div_system_title" onload="unlockKey()">
                 <h1><b>List of messages you received:</b></h1>
             </div>
             

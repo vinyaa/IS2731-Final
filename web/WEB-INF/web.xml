@@ -38,7 +38,7 @@
     <error-page>
         <error-code>404</error-code>
         <location>/error404.jsp</location>
-    </error-page>
+    </error-page> <!--
     <error-page>
         <error-code>500</error-code>
         <location>/error500.jsp</location>
@@ -46,7 +46,7 @@
     <error-page>
         <exception-type>javax.servlet.ServletException</exception-type>
         <location>/servletException.jsp</location>
-    </error-page>
+    </error-page>-->
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>controllers.filter.LoginFilter</filter-class>

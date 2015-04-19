@@ -9,12 +9,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="js/utilities.js"></script>
+        <script type="text/javascript" src="js/cryptojs/rollups/aes.js"></script>
         <link rel="stylesheet" href="css/client_style.css" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <title>Client First Passcode Encryption Page</title>
     </head>
     <body>
-        <% String username = request.getAttribute("client").toString();%>
+        <% String username = request.getAttribute("client").toString();
+            String myprivate = "";
+            String mypublic = "";
+            if(request.getAttribute("myprivate") != null && request.getAttribute("mypublic") != null) {
+                myprivate = request.getAttribute("myprivate").toString();
+                mypublic = request.getAttribute("mypublic").toString();
+            }
+        %>
+        <div id='myprivate' style='visibility: hidden'><%=myprivate%></div>
+        
         <div class="div_system_title">
             <h1><b>Passcode</b></h1>
         </div>
@@ -27,24 +38,18 @@
                 <div class="form-group">
                     <div class="col-sm-10">
                         <label for="inputPassword3" class="col-sm-2 control-label">Passcode</label>
-                        <input type="password" name="passcode" class="form-control" />
+                        <input type="password" id="passcode" name="passcode" class="form-control" />
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Confirm Passcode</label>
-                        <input type="password" name="confirm_passcode" class="form-control" />
-                    </div>
-                </div>
+                </div>   
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="hidden" name="userName" value="<%=username %>" />
-                        <input type="submit" name="submitPass" class="btn btn-default" value="Confirm Passcode" />
+                        <input type="hidden" name="userName" value="<%=username%>" />
+                        <input type="hidden" name="mypublic" value="<%=mypublic%>" />
+                        <input type="submit" name="submitPass" class="btn btn-default" value="Confirm Passcode" onclick="getKey()" />
                         <input type="reset" value="Clear" class="btn btn-default"/>
                         <a href="login.jsp" ><input type="button" value="Back" class="btn btn-default" /></a>
                     </div>
                 </div>
-                
             </form>
         </div>
         

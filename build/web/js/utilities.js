@@ -19,7 +19,7 @@ function getKey(){
     var passcode;
     var encryptedkey;
     
-    passcode = document.getElementById("passcode").innerHTML;
+    passcode = document.getElementById("passcode").value;
     privatekey = document.getElementById("myprivate").innerHTML;
     encryptedkey = encryptKey(privatekey, passcode);
     
@@ -54,7 +54,7 @@ function unlockKey(){
     
     //this is for the test to show key on decryptexample (can be removed)
     document.getElementById("test").innerHTML = decryptedkey.toString();
-    
+    return null;
 }
 
 

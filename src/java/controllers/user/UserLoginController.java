@@ -131,7 +131,11 @@ public class UserLoginController extends HttpServlet {
                     if (publicKey.equals("")) {
                         requestDispatcher = request.getRequestDispatcher("/alertConfirmEmail.jsp");  
                     } else {
-                        requestDispatcher = request.getRequestDispatcher("/client/clientPasscodeDecrypt.jsp");  
+                        request.setAttribute("client", userName);
+                        MessageManager messageManager = new MessageManager();
+                        List<Message> messageList = messageManager.queryAllMessagesForReceiver(userName);
+                        request.setAttribute("receiverMessageList", messageList);
+                        requestDispatcher = request.getRequestDispatcher("/client/clientMessage.jsp");  
                     }
                 }   
             } 

@@ -139,6 +139,8 @@ public class UserListController extends HttpServlet {
                 HttpSession session = request.getSession();
                 String senderName = session.getAttribute("userName").toString();
                 request.setAttribute("sender", senderName);
+                String publicKey = userManager.findPublicKey(receiver.getUserName());
+                request.setAttribute("publicKey", publicKey);
                 requestDispatcher = request.getRequestDispatcher("/admin/createMessage.jsp");
                 requestDispatcher.forward(request, response);
             }

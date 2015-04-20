@@ -9,7 +9,7 @@ function encryptMessage(){
     var message = document.getElementById("message").value;
     
     //recipients public key - retrieve from an element called publickey
-    var publickey = document.getElementById("publickey").value;
+    var publickey = document.getElementById("publicKey").innerHTML;
     var beginning = "-----BEGIN PUBLIC KEY-----";
     var end = "-----END PUBLIC KEY-----";
     publickey = beginning.concat(publickey);
@@ -55,7 +55,9 @@ function decryptMessage(){
     var crypt = new JSEncrypt();
     crypt.setPrivateKey(private);
     var decryptedmessage = crypt.decrypt(message);
-    
+    if(!decryptedmessage) {
+        decryptedmessage = "Forgot your passcode? Ask a Librarian";
+    }
     document.getElementById("message").value = decryptedmessage;
-      
+    document.getElementById("div_login_passcode").innerHTML = "";
 }

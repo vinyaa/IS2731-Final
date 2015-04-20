@@ -54,7 +54,7 @@
                                 }
                                 
                                 if (content.length() > 50) {
-                                    content = content.substring(0, 47) + "......";
+                                    content = "Encrypted Content ******";
                                 }
                     %>  
                                 <tr>
@@ -66,14 +66,12 @@
                                     <td style="padding-left: 5px; padding-right: 5px; width: 10%;">  
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="mid" value="<%=message.getMid()%>"/>
-                                            <!--<input type="submit" name="editUser" value="Edit" class="submit" />-->   
                                             <input type="submit" name="editMessage" value="Edit Message" class="btn btn-xs btn-default" />  
                                         </form> 
                                     </td>  
                                     <td style="padding-left: 5px; padding-right: 5px; width: 10%;">
                                         <form action="UserList" method="post">
                                             <input type="hidden" name="mid" value="<%=message.getMid()%>"/>
-                                            <!--<input type="submit" name="removeUser" value="Remove" class="submit"/>-->      
                                             <input type="submit" name="removeMessage" value="Remove Message" class="btn btn-xs btn-danger" />     
                                         </form>
                                     </td> 
@@ -87,9 +85,7 @@
             
             <div id="two-buttons">
                 <form action="MessageList" method="post" >
-                    <!--<input type="submit" name="addUser" value="Add User" class="submit_list_users_add"/>-->
                     <input type="submit" name="listUser" value="List Users" class="btn btn-primary"/>
-                    <!--<input type="submit" name="logOut" value="Log Out" class="submit_list_users_log_out"/>-->
                     <input type="submit" name="logOut" value="Log Out" class="btn btn-warning"/>
                 </form>
             </div>

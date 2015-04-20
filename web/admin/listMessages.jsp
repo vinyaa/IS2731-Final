@@ -54,7 +54,7 @@
                                 }
                                 
                                 if (content.length() > 50) {
-                                    content = content.substring(0, 47) + "......";
+                                    content = "Encrypted Content ******";
                                 }
                     %>  
                                 <tr>

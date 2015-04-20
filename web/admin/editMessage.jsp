@@ -53,8 +53,6 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <input type="hidden" name="mid" value="<%=message.getMid() %>" />
-                            <input type="submit" name="editMessage" value="Confirm Edit" class="btn btn-default"/>
-                            <input type="reset" value="Clear" class="btn btn-default"/>
                             <input type="submit" name="Back" value="Back" class="btn btn-default"/>
                         </div>
                     </div>
@@ -66,9 +64,6 @@
                 <h1><b>There is no valid message to edit!</b></h1>
             </div>
         <% }
-            
-            
-            
         %>
     </body>
 </html>

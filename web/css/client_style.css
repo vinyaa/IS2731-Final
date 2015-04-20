@@ -14,7 +14,7 @@
 
 
 .form-group input[type=submit], input[type=reset] {
-    margin-right: 20px;
+    margin-right: 20px; 
 }
 
 #two-buttons input[type=submit], input[type=reset] {

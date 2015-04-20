@@ -12,6 +12,8 @@
     <head>
         <script type="text/javascript" src="js/utilities.js"></script>
         <script type="text/javascript" src="js/cryptojs/rollups/aes.js"></script>
+        <script type="text/javascript" src="js/messageutils.js"></script>
+        <script type="text/javascript" src="js/jsencrypt.js"></script>
         <link rel="stylesheet" href="css/client_style.css" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -62,7 +64,7 @@
                                 }
                                 
                                 if (content.length() > 50) {
-                                    content = content.substring(0, 47) + "......";
+                                    content = "Encrypted Message ******";
                                 }
                    
                     %>  

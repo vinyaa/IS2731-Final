@@ -14,11 +14,22 @@
 
 
 .form-group input[type=submit], input[type=reset] {
-    margin-right: 20px;
+    margin-right: 20px; 
 }
 
 #two-buttons input[type=submit], input[type=reset] {
     margin-right: 20px;
+}
+
+input.form-control {
+    width: 100%;
+}
+
+#div_current_message form.form-horizontal{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
 }
 
 select.form-control {
@@ -26,8 +37,8 @@ select.form-control {
 }
 
 textarea.form-control {
-    width: 35%; 
     resize: none;
+    width: 100%;
 }
 
 #div_login_fieldset {
@@ -218,8 +229,3 @@ textarea.form-control {
     text-align: center;
 }
 
-#div_current_message form.form-horizontal{
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
-}

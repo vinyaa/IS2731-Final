@@ -145,10 +145,10 @@ public class UserRegisterController extends HttpServlet {
         
         if(actionRegister !=null && actionRegister.equals("Register")) {
             if(userName.length() > 0 && password.length() > 0 &&
-               password.equals(passwordConfirm) && userEmail!= null && userAnswer != null) {
+                password.equals(passwordConfirm) && userEmail!= null && userAnswer != null) {
                 //validate the format of userName and password
                 if(userValidator.validateUserName(userName) == true &&
-                   userValidator.validateUserPassword(password) == true) {
+                    userValidator.validateUserPassword(password) == true) {
                     userManager.addUser(userName, password, userEmail, userAnswer, "client");
                     userManager.changeActivation(userName, 0);
                     
@@ -159,7 +159,7 @@ public class UserRegisterController extends HttpServlet {
                     //token will be expired after 60 mins
                     session.setMaxInactiveInterval(60 * 60);
                     //send this token as URL to user's email address
-                    URL url = new URL("http://localhost:8084/is2731_final/register?"
+                    URL url = new URL("https://localhost:8443/is2731_final/register?"
                                     + "client="+userName+"&token="+sessionToken+""
                                     + "&action=Activate");
                     EmailNotifier emailNotifier = new EmailNotifier();

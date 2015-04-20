@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/is2731_final"/>
+<Context antiJARLocking="true" path="/is2731_final">
+    <Realm className="org.apache.catalina.realm.JDBCRealm"
+                driverName="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:8889/is2731?user=is2731&amp;password=is2731"
+                userTable="users" userNameCol="user_name" userCredCol="hashed_password"
+                userRoleTable="users_roles" roleNameCol="role_name" />
+                
+    <Resource name="jdbc/is2731" auth="Container" type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+               username="is2731" password="is2731" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:8889/is2731"/>
+    
+    
+    
+</Context>

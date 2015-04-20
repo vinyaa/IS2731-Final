@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Apr 18, 2015 at 11:33 AM
+-- Generation Time: Apr 20, 2015 at 03:33 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.5.14
 
@@ -27,23 +27,14 @@ CREATE TABLE `message` (
   `time` datetime NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `is_read` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`mid`, `sender`, `receiver`, `time`, `content`, `is_read`) VALUES
-(1, 'dog', 'cat', '2015-04-07 19:59:59', 'dooogy', 1),
-(5, 'dog', 'kitty', '2015-04-06 20:35:54', 'hello kitty\r\nhow are you!!!\r\nnice', 1),
-(6, 'dog', 'cat', '2015-04-07 21:33:41', 'nice job !', 1),
-(7, 'dog', 'cat', '2015-04-07 21:33:35', '1111qqqqqq1111qqqqqq1111qq111qqqqqq1111qqqqqq1111qqqqqq1111qqqqqq', 0),
-(8, 'dog', 'kitty', '2015-04-07 21:33:24', 'hi  ', 1),
-(9, 'dog', 'cat', '2015-04-07 20:47:07', 'test test test', 1),
-(10, 'dog', 'cat', '2015-04-07 21:01:13', 'how do you feel?', 1),
-(11, 'dog', 'cat', '2015-04-07 21:33:08', 'hhhhhhaaaaaa', 1),
-(12, 'dog', 'cat', '2015-04-09 14:52:49', 'hhhh', 1),
-(13, 'dog', 'cat', '2015-04-13 15:31:02', 'hello', 0);
+(3, 'dog', 'cat', '2015-04-20 15:05:40', 'g3EuwZFdhXfWCyHH35ZLPWiMBRt/wyImRJ36Dwa5aFPU1hcUGcbtDO99PZsYIEoyfsHVxNurRj4cAEtdxGeLy29+HU5Q4Xk9kSe7kAkmgvgjPhxtv6ejm6JjdF89D4KD10/z9m6piwTG3sqcEOIeKCqBUHiFy4vv25Dfaj5DxCU=', 1);
 
 -- --------------------------------------------------------
 
@@ -83,11 +74,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_name`, `hashed_password`, `email`, `hashed_answer`, `is_activated`, `pubkey`) VALUES
-('cat', '77af778b51abd4a3c51c5ddd97204a9c3ae614ebccb75a606c3b6865aed6744e', 'cat@cat.com', '77af778b51abd4a3c51c5ddd97204a9c3ae614ebccb75a606c3b6865aed6744e', 0, NULL),
-('dog', 'cd6357efdd966de8c0cb2f876cc89ec74ce35f0968e11743987084bd42fb8944', 'dog@dog.com', 'cd6357efdd966de8c0cb2f876cc89ec74ce35f0968e11743987084bd42fb8944', 1, NULL),
-('kitty', '67731ff58137eb39713ae30eba33c54c8c1d5418e081428ca815e4e733d64f6d', 'kitty@kitty.com', '67731ff58137eb39713ae30eba33c54c8c1d5418e081428ca815e4e733d64f6d', 0, NULL),
-('meow', '2744ccd10c7533bd736ad890f9dd5cab2adb27b07d500b9493f29cdc420cb2e0', 'meow@meow.com', '2744ccd10c7533bd736ad890f9dd5cab2adb27b07d500b9493f29cdc420cb2e0', 0, NULL),
-('wolf', 'f76b61b962db075bb76ad6f3fab10f7bd546f92f1b89f18c513d4122575c18ac', 'wolf@wolf.com', 'f76b61b962db075bb76ad6f3fab10f7bd546f92f1b89f18c513d4122575c18ac', 0, NULL);
+('cat', '77af778b51abd4a3c51c5ddd97204a9c3ae614ebccb75a606c3b6865aed6744e', 'yam14@pitt.edu', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCMfQ3Q2E3FubVhxNXJaIk49i4hJhtZwRFi89t+mOXHxa5RjH2y137EhqnoQUTy5PlOYQj7Tk21IZ8vDV8YnBBhdM6OSpUmWJJXicWwtgpMZeLFgR9DDCWJx77ZZhCRrDbUfo0FLyUw5BGsokzWZHMKCC5PSiEIJgGVRF44wHj/uQIDAQAB'),
+('dog', 'cd6357efdd966de8c0cb2f876cc89ec74ce35f0968e11743987084bd42fb8944', 'dog@dog.com', 'cd6357efdd966de8c0cb2f876cc89ec74ce35f0968e11743987084bd42fb8944', 1, '');
 
 -- --------------------------------------------------------
 
@@ -106,10 +94,7 @@ CREATE TABLE `users_roles` (
 
 INSERT INTO `users_roles` (`user_name`, `role_name`) VALUES
 ('dog', 'admin'),
-('cat', 'client'),
-('kitty', 'client'),
-('meow', 'client'),
-('wolf', 'client');
+('cat', 'client');
 
 --
 -- Indexes for dumped tables
@@ -147,7 +132,7 @@ ALTER TABLE `users_roles`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
